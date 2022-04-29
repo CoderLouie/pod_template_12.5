@@ -1,0 +1,15 @@
+/*
+  InfoPlist.strings
+  PROJECT
+
+  Created by USER_NAME on TODAYS_DATE.
+  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
+*/
+
+NSCameraUsageDescription = "We need access to your camera permissions to take photos and edit it.";
+
+NSPhotoLibraryAdditionsUsageDescription = "We need access to your album permissions to store image reports/select photos.";
+
+NSPhotoLibraryUsageDescription = "We need access to your album permissions to store image reports/select photos.";
+ 
+NSUserTrackingUsageDescription = "To provide personalized services, (like ADs you might be interested in), we recommend that you allow the access.";

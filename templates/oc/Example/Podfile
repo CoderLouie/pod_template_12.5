@@ -1,0 +1,27 @@
+# Uncomment the next line to define a global platform for your project
+
+# 官方仓库源
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '10.0'
+
+inhibit_all_warnings!
+
+use_frameworks!
+
+def commonPods
+  pod 'AFNetworking'
+  pod 'YYKit'
+  pod 'SDWebImage' 
+  pod 'Masonry' 
+  pod 'SVProgressHUD'
+
+end  
+
+target '${POD_NAME}_dev' do
+  commonPods
+end
+
+target '${POD_NAME}_dis' do
+  commonPods
+end

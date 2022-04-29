@@ -1,0 +1,15 @@
+/*
+  InfoPlist.strings
+  PROJECT
+
+  Created by USER_NAME on TODAYS_DATE.
+  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
+*/
+
+NSCameraUsageDescription = "我们需要获得您的相机权限才能进行拍照并进行编辑。";
+
+NSPhotoLibraryAdditionsUsageDescription = "我们需要获得您的相册权限才能进行照片储存/照片选择。";
+
+NSPhotoLibraryUsageDescription = "我们需要获得您的相册权限才能进行照片储存/照片选择。";
+
+NSUserTrackingUsageDescription = "为了提供个性化服务（ 比如您可能感兴趣的广告内容），我们建议您允许访问。";

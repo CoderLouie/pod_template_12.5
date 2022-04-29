@@ -1,0 +1,50 @@
+# Uncomment the next line to define a global platform for your project
+
+# 官方仓库源
+source 'https://github.com/CocoaPods/Specs.git'
+
+
+platform :ios, '11.0'
+
+inhibit_all_warnings!
+
+use_frameworks!
+
+def commonPods
+  pod 'SwiftyUserDefaults' 
+  pod 'YYKit' 
+  pod 'SwifterKnife'
+  pod 'Moya' 
+  
+end
+
+target '${POD_NAME}_dev' do
+  commonPods
+end
+
+target '${POD_NAME}_dis' do
+  commonPods
+end
+
+
+# abstract_target 'abstract_pod' do  #这里的abstract_pod在实际targets中不存在，是虚拟
+# 	pod 'SwiftyUserDefaults'
+# 	pod 'Reusable'
+# 	pod 'SnapKit'
+# 	pod 'Then'
+# 	pod 'SwifterSwift'
+# 	pod 'Alamofire'
+
+# 	target '${POD_NAME}_dev' do
+# 	    pod 'Masonry'
+# 	end
+
+# 	target '${POD_NAME}_dis' do
+# 	    pod 'SDWebImage'
+# 	end
+# end
+
+
+
+
+ 
