@@ -1,9 +1,8 @@
 //
-//  NSObject+Then.m
+//  NSObject+LYAdd.m
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
-//  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
 #import "NSObject+Then.h"
@@ -11,15 +10,12 @@
 
 @implementation NSObject (Then)
 
-+ (instancetype)instantiate:(void (^)(id _Nonnull))work {
-    id instance = [[self class] new];
-    !work ?: work(instance);
-    return instance;
-}
-
-- (instancetype)then:(void (^)(id _Nonnull))work {
-    !work ?: work(self);
+- (instancetype)yy_then:(void (^)(id _Nonnull))block {
+    block(self);
     return self;
+}
++ (instancetype)yy_then:(void (^)(id obj))block {
+    return [[self new] yy_then:block];
 }
 
 @end

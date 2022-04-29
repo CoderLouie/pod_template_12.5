@@ -3,7 +3,6 @@
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
-//  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,10 +20,6 @@ NS_INLINE UIColor *GrayColor(CGFloat value) {
 }
 NS_INLINE UIColor *GrayAColor(CGFloat value, CGFloat alpha) {
     return RGBA(value, value, value, alpha);
-}
-
-NS_INLINE NSInteger RandomInRange(NSInteger lower, NSInteger upper) {
-    return lower + (arc4random() % (upper - lower + 1));
 }
 
 /** roundl 四舍五入取整，求最接近 x 的整数
@@ -78,18 +73,25 @@ NS_INLINE NSInteger RoundedToNearest(NSInteger multiple, NSInteger value) {
     return value == 0 ? 0 : (NSInteger)(round(value / multiple)) * multiple;
 } 
 
-NS_INLINE NSString *RandomString1(NSInteger lowerLength, NSInteger upperLength) {
+
+NS_INLINE NSInteger RandomInRange(NSInteger lower, NSInteger upper) {
+    return lower + (arc4random() % (upper - lower + 1));
+}
+NS_INLINE NSString *RandomStringInLengthRange(NSInteger lowerLength, NSInteger upperLength) {
     static const NSString *alphabet = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     NSUInteger count = alphabet.length - 1;
     NSUInteger n = RandomInRange(lowerLength, upperLength);
-    NSMutableString *string = [NSMutableString stringWithCapacity: count];
+    NSMutableString *string = [NSMutableString stringWithCapacity:n];
     while (n-- > 0) {
         [string appendFormat:@"%c", [alphabet characterAtIndex:RandomInRange(0, count)]];
     }
     return string;
 }
+NS_INLINE NSString *RandomStringInLength(NSInteger length) {
+    return RandomStringInLengthRange(length, length);
+}
 NS_INLINE NSString *RandomString() {
-    return RandomString1(5, 40);
+    return RandomStringInLengthRange(5, 40);
 }
 
 NS_INLINE NSString *TR(NSString *key) {
@@ -97,9 +99,6 @@ NS_INLINE NSString *TR(NSString *key) {
 }
 
 typedef NSString * const NotificationName;
-
-@interface GOAdapter : NSObject
-
-@end
+ 
 
 NS_ASSUME_NONNULL_END

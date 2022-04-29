@@ -1,15 +1,13 @@
-/*
-  InfoPlist.strings
-  PROJECT
+//
+//  InfoPlist.strings
+//  PROJECT
+//
+//  Created by USER_NAME on TODAYS_DATE.
+//
 
-  Created by USER_NAME on TODAYS_DATE.
-  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
-*/
+"CFBundleDisplayName" = "PROJECT";
 
-NSCameraUsageDescription = "We need access to your camera permissions to take photos and edit it.";
+"NSUserTrackingUsageDescription" = "If you want to get more personalized services (such as advertisements that you may be interested in), turn on the permission and you can get it right away";
 
-NSPhotoLibraryAdditionsUsageDescription = "We need access to your album permissions to store image reports/select photos.";
-
-NSPhotoLibraryUsageDescription = "We need access to your album permissions to store image reports/select photos.";
- 
-NSUserTrackingUsageDescription = "To provide personalized services, (like ADs you might be interested in), we recommend that you allow the access.";
+"NSPhotoLibraryAddUsageDescription" = "Needs to access photo to save selected wallpapers.";
+"NSPhotoLibraryUsageDescription" = "Needs to access photo to save selected wallpapers.";

@@ -1,15 +1,13 @@
-/*
-  InfoPlist.strings
-  PROJECT
+//
+//  InfoPlist.strings
+//  PROJECT
+//
+//  Created by USER_NAME on TODAYS_DATE.
+//
 
-  Created by USER_NAME on TODAYS_DATE.
-  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
-*/
+"CFBundleDisplayName" = "PROJECT";
 
-NSCameraUsageDescription = "我们需要获得您的相机权限才能进行拍照并进行编辑。";
+"NSUserTrackingUsageDescription" = "想要获取更多个性化服务（比如您可能感兴趣的广告等内容），打开允许权限，马上就能获得";
 
-NSPhotoLibraryAdditionsUsageDescription = "我们需要获得您的相册权限才能进行照片储存/照片选择。";
-
-NSPhotoLibraryUsageDescription = "我们需要获得您的相册权限才能进行照片储存/照片选择。";
-
-NSUserTrackingUsageDescription = "为了提供个性化服务（ 比如您可能感兴趣的广告内容），我们建议您允许访问。";
+"NSPhotoLibraryAddUsageDescription" = "需要访问照片以保存选定的壁纸。";
+"NSPhotoLibraryUsageDescription" = "需要访问照片以保存选定的壁纸。";

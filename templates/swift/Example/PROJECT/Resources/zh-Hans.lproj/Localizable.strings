@@ -5,9 +5,4 @@
 //  Created by USER_NAME on TODAYS_DATE.
 //
 
-"CFBundleDisplayName" = "PROJECT";
 
-"NSUserTrackingUsageDescription" = "想要获取更多个性化服务（比如您可能感兴趣的广告等内容），打开允许权限，马上就能获得";
-
-"NSPhotoLibraryAddUsageDescription" = "需要访问照片以保存选定的壁纸。";
-"NSPhotoLibraryUsageDescription" = "需要访问照片以保存选定的壁纸。";

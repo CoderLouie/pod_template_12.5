@@ -3,7 +3,6 @@
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
-//  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
 #import "BaseView.h"
@@ -27,6 +26,24 @@
 
 @end
 
+@implementation BaseControl
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (!self) return nil;
+    [self setup];
+    return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setup];
+}
+
+
+- (void)setup { }
+
+@end
 
 @implementation BaseTableCell
 

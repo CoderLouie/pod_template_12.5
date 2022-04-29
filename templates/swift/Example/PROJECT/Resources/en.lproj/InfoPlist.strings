@@ -4,3 +4,10 @@
 //
 //  Created by USER_NAME on TODAYS_DATE.
 //
+
+"CFBundleDisplayName" = "PROJECT";
+
+"NSUserTrackingUsageDescription" = "If you want to get more personalized services (such as advertisements that you may be interested in), turn on the permission and you can get it right away";
+
+"NSPhotoLibraryAddUsageDescription" = "Needs to access photo to save selected wallpapers.";
+"NSPhotoLibraryUsageDescription" = "Needs to access photo to save selected wallpapers.";

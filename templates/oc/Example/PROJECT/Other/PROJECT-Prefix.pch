@@ -3,7 +3,6 @@
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
-//  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
 #ifndef PROJECT_pch
@@ -12,9 +11,7 @@
 #import <Masonry/Masonry.h>
 #import <YYKit/YYKit.h>
 #import "Constant.h"
-#import "HUD.h" 
-
-#import "UIViewController+IVAdd.h"
+#import "HUD.h"  
 
 #ifdef DEBUG
 #define CPDLog(...) NSLog(__VA_ARGS__)
@@ -23,4 +20,4 @@
 #endif
 #define CPDLogFunc CPDLog(@"%s", __func__)
 
-#endif /* MyAnyChat_pch */
+#endif /* PROJECT_pch */
