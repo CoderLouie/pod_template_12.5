@@ -144,7 +144,7 @@ module Pod
         
         def user_name
 #            (ENV['GIT_COMMITTER_NAME'] || github_user_name || `git config user.name` || `<GITHUB_USERNAME>` ).strip
-            'liyang'
+            '李阳'
         end
         
         def project_owner
@@ -166,7 +166,7 @@ module Pod
         end
         
         def date
-            Time.now.strftime "%m/%d/%Y"
+            Time.now.strftime "%Y/%m/%d"
         end
         
         def podfile_path

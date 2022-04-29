@@ -1,12 +1,6 @@
 //
-//  Console.swift
+//  InfoPlist.strings
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
 //
-
-import Foundation
- 
-
-extension Console {
-}
