@@ -5,7 +5,7 @@
 //  Created by USER_NAME on TODAYS_DATE.
 //
 
-#import "NSObject+Then.h"
+#import "NSObject+LYAdd.h"
 
 
 @implementation NSObject (Then)

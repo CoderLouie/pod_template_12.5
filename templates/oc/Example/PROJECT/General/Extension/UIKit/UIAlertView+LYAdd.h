@@ -9,9 +9,9 @@
 
 @interface UIAlertView (LYAdd)
 
-- (UIAlertView *)addDefaultActionWithTitle:(NSString *)title handler:(void (^)(void))handler;
+- (UIAlertView *(^)(NSString *title, void(^handler)(void)))addNormalButton;
 
-- (UIAlertView *)addCancelActionWithTitle:(NSString *)title handler:(void (^)(void))handler;
+- (UIAlertView *(^)(NSString *title, void(^handler)(void)))setCancelButton;
 
 @end
 
