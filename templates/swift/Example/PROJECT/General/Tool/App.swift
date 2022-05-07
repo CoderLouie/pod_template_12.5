@@ -35,6 +35,14 @@ extension App {
         
         return envir
     }()
+    /// false表示正式环境，true表示测试服环境
+    static var isDevelopment: Bool {
+        #if DEVELOPMENT
+        return true
+        #else
+        return false
+        #endif
+    }
      
     /// 用于Release环境输出日志(true), 正式包需设置为false
     static var logEnable: Bool {
@@ -44,7 +52,35 @@ extension App {
         return false
         #endif
     }
+    /// 是否是我们平常开发写代码的调试模式
+    static var isCoding: Bool {
+        #if DEVELOPMENT
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+        #else
+        return false
+        #endif
+    }
     
+    /// 桌面上的应用名称，多语言
+    static var desktopName: String {
+        LocalizedKey("CFBundleDisplayName", "InfoPlist").localized
+    }
+    
+    /// 以下生命周期方法 只应该在 AppDelegate 响应代理方法中调用
+    static func didLaunch() {
+        
+        if installTime > 0 { return }
+        Defaults[\.appInstallTimestamp] = Date().timeIntervalSince1970
+    }
+    static func didEnterBackground() { 
+    }
+    static func willTerminate() {
+        Defaults[\.appIsFirstLauch] = false
+    }
 }
 
 import SwiftyUserDefaults

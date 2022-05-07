@@ -117,6 +117,8 @@
 		B6A13487281B9EC300E52957 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6A13489281B9EC300E52957 /* Localizable.strings */; };
 		B6A1348B281B9ECE00E52957 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6A1348E281B9ECE00E52957 /* InfoPlist.strings */; };
 		B6A1348C281B9ECE00E52957 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6A1348E281B9ECE00E52957 /* InfoPlist.strings */; };
+		B6AA7DD028260C700018FD98 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA7DCF28260C700018FD98 /* Permission.swift */; };
+		B6AA7DD128260C700018FD98 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA7DCF28260C700018FD98 /* Permission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +187,7 @@
 		B6A1348A281B9EC900E52957 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B6A1348D281B9ECE00E52957 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B6A1348F281B9ED100E52957 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B6AA7DCF28260C700018FD98 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,6 +432,7 @@
 				B6A1321C281B82A700E52957 /* GOMO.swift */,
 				B6A1321E281B82A700E52957 /* ObjectUnicode.swift */,
 				B6A1347C281B9E2F00E52957 /* Language.swift */,
+				B6AA7DCF28260C700018FD98 /* Permission.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -598,6 +602,7 @@
 				B6A13232281B82A700E52957 /* UINavigationController+Add.swift in Sources */,
 				B6A1323D281B82A700E52957 /* Scanner+Add.swift in Sources */,
 				B6A13231281B82A700E52957 /* UITabBarItem+Add.swift in Sources */,
+				B6AA7DD028260C700018FD98 /* Permission.swift in Sources */,
 				B6A133A9281B9C2100E52957 /* UIFont+Add.swift in Sources */,
 				B6A13243281B82A700E52957 /* UIBarButtonItemAdd.swift in Sources */,
 				B6A1322E281B82A700E52957 /* TabBarController.swift in Sources */,
@@ -656,6 +661,7 @@
 				B6A13279281B875A00E52957 /* UINavigationController+Add.swift in Sources */,
 				B6A1327A281B875A00E52957 /* Scanner+Add.swift in Sources */,
 				B6A1327B281B875A00E52957 /* UITabBarItem+Add.swift in Sources */,
+				B6AA7DD128260C700018FD98 /* Permission.swift in Sources */,
 				B6A133AA281B9C2100E52957 /* UIFont+Add.swift in Sources */,
 				B6A1327C281B875A00E52957 /* UIBarButtonItemAdd.swift in Sources */,
 				B6A1327D281B875A00E52957 /* TabBarController.swift in Sources */,

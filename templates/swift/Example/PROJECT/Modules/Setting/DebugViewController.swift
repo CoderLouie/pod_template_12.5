@@ -13,28 +13,9 @@ fileprivate class TestCaseCell: BaseTableCell, Reusable {
 fileprivate enum TestCase: String, CaseIterable {
     case kc_clear = "KeyChain 清除所有"
     
-    case sub_style101 = "Subscribe 样式101"
-    case sub_style102 = "Subscribe 样式102"
-    
-    case iap_getProducts = "IAP 获取所有商品"
-    case iap_purchase = "IAP 购买商品"
-    case iap_restore = "IAP 恢复购买"
-    
     func perform(from vc: DebugViewController) {
         switch self {
         case .kc_clear:
-            break
-            
-        case .sub_style101:
-            break
-        case .sub_style102:
-            break
-            
-        case .iap_getProducts:
-            break
-        case .iap_purchase:
-            break
-        case .iap_restore:
             break
         }
     }
@@ -56,24 +37,12 @@ extension DebugViewController {
     private func test1() {
         
     }
-    private func test2() {
-        
-    }
-    private func test3() {
-        
-    }
 }
 // MARK: - Action
 extension DebugViewController {
     @objc private func item1DidClick() {
         
-    }
-    @objc private func item2DidClick() {
-        
-    }
-    @objc private func item3DidClick() {
-        
-    }
+    } 
     
     override func backBarButtonItemClicked() {
         navigationController?.popToRootViewController(animated: true)
