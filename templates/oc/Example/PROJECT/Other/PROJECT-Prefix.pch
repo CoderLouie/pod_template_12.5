@@ -14,7 +14,8 @@
 #import "HUD.h"  
 
 #ifdef DEBUG
-#define CPDLog(...) NSLog(__VA_ARGS__)
+//#define CPDLog(...) NSLog(__VA_ARGS__)
+#define CPDLog(fmt, ...) NSLog((@"%s [Line %d]\n" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define CPDLog(...)
 #endif

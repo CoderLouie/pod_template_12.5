@@ -71,8 +71,7 @@ extension App {
     }
     
     /// 以下生命周期方法 只应该在 AppDelegate 响应代理方法中调用
-    static func didLaunch() {
-        
+    static func didLaunch() { 
         if installTime > 0 { return }
         Defaults[\.appInstallTimestamp] = Date().timeIntervalSince1970
     }
@@ -96,14 +95,14 @@ fileprivate extension DefaultsKeys {
 
 extension App {
     
-   public static var installTimestamp: TimeInterval {
+   static var installTime: TimeInterval {
        var installTime = Defaults[\.appInstallTimestamp]
        if installTime > 0 { return installTime }
        installTime = Date().timeIntervalSince1970
        Defaults[\.appInstallTimestamp] = installTime
        return installTime
    }
-   public static var isFirstLaunch: Bool {
+   static var isFirstLaunch: Bool {
        let isFirst = Defaults[\.appIsFirstLauch]
        if isFirst { return true }
        Defaults[\.appIsFirstLauch] = false
