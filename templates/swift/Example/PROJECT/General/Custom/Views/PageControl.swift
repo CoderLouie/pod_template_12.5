@@ -11,67 +11,83 @@ class PageControl: BaseView {
     var numberOfPages: Int {
         set {
             if pages.count == newValue { return }
-            if let constraint = tailConstraint {
-                constraint.deactivate()
-            }
+            tailConstraint?.deactivate()
             if pages.count < newValue {
                 var prevView = pages.last
-                for _ in pages.count..<newValue {
+                for i in pages.count..<newValue {
+                    let hit = i == _currentPage
                     prevView = UIView().then {
-                        $0.backgroundColor = pageIndicatorTintColor
+                        $0.backgroundColor = hit ? currentPageIndicatorTintColor : pageIndicatorTintColor
                         addSubview($0)
                         pages.append($0)
                         $0.snp.makeConstraints { make in
                             if let prev = prevView {
-                                make.left.equalTo(prev.snp.right).offset(4.fit)
+                                make.leading.equalTo(prev.snp.trailing).offset(pageWidth)
                                 make.centerY.equalTo(prev)
                             } else {
-                                make.left.equalTo(0)
+                                make.leading.equalToSuperview()
                                 make.top.bottom.equalTo(0)
                             }
-                            make.height.equalTo(4.fit)
-                            make.width.equalTo(pageWidth)
+                            make.height.equalTo(pageWidth)
+                            make.width.equalTo(hit ? currentPageWith : pageWidth)
                         }
                     }
                 }
-                guard let prev = prevView else {
-                    return
-                }
-                prev.snp.makeConstraints { make in
-                    tailConstraint = make.right.equalTo(0).constraint
+                prevView?.snp.makeConstraints { make in
+                    tailConstraint = make.trailing.equalToSuperview().constraint
                 }
             } else {
+                if newValue < 1 {
+                    pages.forEach { $0.removeFromSuperview() }
+                    pages = []
+                    tailConstraint?.deactivate()
+                    tailConstraint = nil
+                    layoutIfNeeded()
+                    return
+                }
                 let pieces = pages[newValue...]
+                if _currentPage > newValue - 1 {
+                    _currentPage = newValue - 1
+                    let hitPage = pages[_currentPage]
+                    hitPage.backgroundColor = currentPageIndicatorTintColor
+                    hitPage.snp.updateConstraints { make in
+                        make.width.equalTo(currentPageWith)
+                    }
+                }
                 pieces.forEach { $0.removeFromSuperview() }
                 pages.removeLast(pages.count - newValue)
                 if let last = pages.last {
                     last.snp.makeConstraints { make in
-                        tailConstraint = make.right.equalTo(0).constraint
+                        tailConstraint = make.trailing.equalTo(0).constraint
                     }
                 }
             }
-            
-            updateConstraintsIfNeeded()
+             
+            layoutIfNeeded()
         }
         get { pages.count }
     }
-    var currentPage = 0 {
-        didSet {
-            guard !pages.isEmpty else { return }
-            let oldPage = pages[oldValue]
-            let newPage = pages[currentPage]
+    private var _currentPage = 0
+    var currentPage: Int {
+        get { _currentPage }
+        set {
+            guard newValue != _currentPage else { return }
+            guard pages.fullRange.contains(newValue) else { return }
+            let oldPage = pages[_currentPage]
+            let newPage = pages[newValue]
+            _currentPage = newValue
+            oldPage.snp.updateConstraints { make in
+                make.width.equalTo(self.pageWidth)
+            }
+            newPage.snp.updateConstraints { make in
+                make.width.equalTo(self.currentPageWith)
+            }
             UIView.animate(withDuration: 0.25) {
-                oldPage.snp.updateConstraints { make in
-                    make.width.equalTo(self.pageWidth)
-                }
                 oldPage.backgroundColor = self.pageIndicatorTintColor
-                newPage.snp.updateConstraints { make in
-                    make.width.equalTo(self.currentPageWith)
-                }
                 newPage.backgroundColor = self.currentPageIndicatorTintColor
+                self.layoutIfNeeded()
             } completion: { _ in
             }
-//            updateConstraintsIfNeeded()
         }
     }
     
@@ -106,13 +122,13 @@ class PageControl: BaseView {
     
     override func setup() {
         super.setup()
-        DispatchQueue.main.async {
-            self.currentPage = 0
+        self.snp.makeConstraints { make in
+            make.width.height.equalTo(1).priority(50)
         }
     }
     
-    private let pageWidth = 9.fit
-    private let currentPageWith = 18.fit
+    private let pageWidth = 4.fit
+    private let currentPageWith = 12.fit
     
     private var pages: [UIView] = []
     private var tailConstraint: Constraint?

@@ -7,5 +7,5 @@
 
 import UIKit
 
-extension CAKeyframeAnimation { 
+extension CAAnimation {
 }

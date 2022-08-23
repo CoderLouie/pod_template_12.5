@@ -22,15 +22,12 @@
 		B6A13234281B82A700E52957 /* UIColor+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F8281B82A700E52957 /* UIColor+Add.swift */; };
 		B6A13235281B82A700E52957 /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F9281B82A700E52957 /* UIView+Add.swift */; };
 		B6A13236281B82A700E52957 /* UIViewController+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FA281B82A700E52957 /* UIViewController+Add.swift */; };
-		B6A13237281B82A700E52957 /* Value+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FC281B82A700E52957 /* Value+Add.swift */; };
 		B6A13238281B82A700E52957 /* Dictionary+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FD281B82A700E52957 /* Dictionary+Add.swift */; };
 		B6A13239281B82A700E52957 /* Sequence+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FE281B82A700E52957 /* Sequence+Add.swift */; };
 		B6A1323A281B82A700E52957 /* Date+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FF281B82A700E52957 /* Date+Add.swift */; };
 		B6A1323B281B82A700E52957 /* DispatchQueue+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13200281B82A700E52957 /* DispatchQueue+Add.swift */; };
 		B6A1323C281B82A700E52957 /* String+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13201281B82A700E52957 /* String+Add.swift */; };
-		B6A1323D281B82A700E52957 /* Scanner+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13202281B82A700E52957 /* Scanner+Add.swift */; };
 		B6A1323E281B82A700E52957 /* Array+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13203281B82A700E52957 /* Array+Add.swift */; };
-		B6A1323F281B82A700E52957 /* NotificationCenter+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13204281B82A700E52957 /* NotificationCenter+Add.swift */; };
 		B6A13240281B82A700E52957 /* CAAnimation+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13206281B82A700E52957 /* CAAnimation+Add.swift */; };
 		B6A13241281B82A700E52957 /* UIColor+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13208281B82A700E52957 /* UIColor+Config.swift */; };
 		B6A13242281B82A700E52957 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1320A281B82A700E52957 /* Protocol.swift */; };
@@ -70,16 +67,13 @@
 		B6A13274281B875A00E52957 /* Dictionary+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FD281B82A700E52957 /* Dictionary+Add.swift */; };
 		B6A13276281B875A00E52957 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131EA281B82A600E52957 /* ProfileViewController.swift */; };
 		B6A13277281B875A00E52957 /* GOMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1321C281B82A700E52957 /* GOMO.swift */; };
-		B6A13278281B875A00E52957 /* NotificationCenter+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13204281B82A700E52957 /* NotificationCenter+Add.swift */; };
 		B6A13279281B875A00E52957 /* UINavigationController+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F6281B82A700E52957 /* UINavigationController+Add.swift */; };
-		B6A1327A281B875A00E52957 /* Scanner+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13202281B82A700E52957 /* Scanner+Add.swift */; };
 		B6A1327B281B875A00E52957 /* UITabBarItem+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F5281B82A700E52957 /* UITabBarItem+Add.swift */; };
 		B6A1327C281B875A00E52957 /* UIBarButtonItemAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1320D281B82A700E52957 /* UIBarButtonItemAdd.swift */; };
 		B6A1327D281B875A00E52957 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131EF281B82A600E52957 /* TabBarController.swift */; };
 		B6A1327E281B875A00E52957 /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F9281B82A700E52957 /* UIView+Add.swift */; };
 		B6A1327F281B875A00E52957 /* WaterflowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1320E281B82A700E52957 /* WaterflowLayout.swift */; };
 		B6A13280281B875A00E52957 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1321F281B82A700E52957 /* Device.swift */; };
-		B6A13281281B875A00E52957 /* Value+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131FC281B82A700E52957 /* Value+Add.swift */; };
 		B6A13282281B875A00E52957 /* UIScrollView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131F7281B82A700E52957 /* UIScrollView+Add.swift */; };
 		B6A13283281B875A00E52957 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131E8281B82A600E52957 /* HomeViewController.swift */; };
 		B6A13284281B875A00E52957 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131EC281B82A600E52957 /* DebugViewController.swift */; };
@@ -119,6 +113,8 @@
 		B6A1348C281B9ECE00E52957 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6A1348E281B9ECE00E52957 /* InfoPlist.strings */; };
 		B6AA7DD028260C700018FD98 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA7DCF28260C700018FD98 /* Permission.swift */; };
 		B6AA7DD128260C700018FD98 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA7DCF28260C700018FD98 /* Permission.swift */; };
+		B6B48C2928B4B3AA0041EB74 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B48C2828B4B3AA0041EB74 /* Slider.swift */; };
+		B6B48C2A28B4B3AA0041EB74 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B48C2828B4B3AA0041EB74 /* Slider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,15 +135,12 @@
 		B6A131F8281B82A700E52957 /* UIColor+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Add.swift"; sourceTree = "<group>"; };
 		B6A131F9281B82A700E52957 /* UIView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
 		B6A131FA281B82A700E52957 /* UIViewController+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Add.swift"; sourceTree = "<group>"; };
-		B6A131FC281B82A700E52957 /* Value+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Value+Add.swift"; sourceTree = "<group>"; };
 		B6A131FD281B82A700E52957 /* Dictionary+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Add.swift"; sourceTree = "<group>"; };
 		B6A131FE281B82A700E52957 /* Sequence+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Add.swift"; sourceTree = "<group>"; };
 		B6A131FF281B82A700E52957 /* Date+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Add.swift"; sourceTree = "<group>"; };
 		B6A13200281B82A700E52957 /* DispatchQueue+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Add.swift"; sourceTree = "<group>"; };
 		B6A13201281B82A700E52957 /* String+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Add.swift"; sourceTree = "<group>"; };
-		B6A13202281B82A700E52957 /* Scanner+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scanner+Add.swift"; sourceTree = "<group>"; };
 		B6A13203281B82A700E52957 /* Array+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Add.swift"; sourceTree = "<group>"; };
-		B6A13204281B82A700E52957 /* NotificationCenter+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Add.swift"; sourceTree = "<group>"; };
 		B6A13206281B82A700E52957 /* CAAnimation+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Add.swift"; sourceTree = "<group>"; };
 		B6A13208281B82A700E52957 /* UIColor+Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Config.swift"; sourceTree = "<group>"; };
 		B6A1320A281B82A700E52957 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
@@ -188,6 +181,7 @@
 		B6A1348D281B9ECE00E52957 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B6A1348F281B9ED100E52957 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B6AA7DCF28260C700018FD98 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		B6B48C2828B4B3AA0041EB74 /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,15 +338,12 @@
 		B6A131FB281B82A700E52957 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				B6A131FC281B82A700E52957 /* Value+Add.swift */,
 				B6A131FD281B82A700E52957 /* Dictionary+Add.swift */,
 				B6A131FE281B82A700E52957 /* Sequence+Add.swift */,
 				B6A131FF281B82A700E52957 /* Date+Add.swift */,
 				B6A13200281B82A700E52957 /* DispatchQueue+Add.swift */,
 				B6A13201281B82A700E52957 /* String+Add.swift */,
-				B6A13202281B82A700E52957 /* Scanner+Add.swift */,
 				B6A13203281B82A700E52957 /* Array+Add.swift */,
-				B6A13204281B82A700E52957 /* NotificationCenter+Add.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -408,6 +399,7 @@
 				B6A13213281B82A700E52957 /* PageControl.swift */,
 				B6A13214281B82A700E52957 /* LocalPlayerView.swift */,
 				B6A133AB281B9C5700E52957 /* LoadingView.swift */,
+				B6B48C2828B4B3AA0041EB74 /* Slider.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -584,6 +576,7 @@
 				B6A13248281B82A700E52957 /* PageControl.swift in Sources */,
 				B6A13242281B82A700E52957 /* Protocol.swift in Sources */,
 				B6A1324D281B82A700E52957 /* Console.swift in Sources */,
+				B6B48C2928B4B3AA0041EB74 /* Slider.swift in Sources */,
 				B6A13253281B82A700E52957 /* App.swift in Sources */,
 				B6A1323A281B82A700E52957 /* Date+Add.swift in Sources */,
 				B6A13249281B82A700E52957 /* LocalPlayerView.swift in Sources */,
@@ -597,10 +590,8 @@
 				B6A13238281B82A700E52957 /* Dictionary+Add.swift in Sources */,
 				B6A1322B281B82A700E52957 /* ProfileViewController.swift in Sources */,
 				B6A1324E281B82A700E52957 /* GOMO.swift in Sources */,
-				B6A1323F281B82A700E52957 /* NotificationCenter+Add.swift in Sources */,
 				B6A1339E281B9C0300E52957 /* HUD+Present.swift in Sources */,
 				B6A13232281B82A700E52957 /* UINavigationController+Add.swift in Sources */,
-				B6A1323D281B82A700E52957 /* Scanner+Add.swift in Sources */,
 				B6A13231281B82A700E52957 /* UITabBarItem+Add.swift in Sources */,
 				B6AA7DD028260C700018FD98 /* Permission.swift in Sources */,
 				B6A133A9281B9C2100E52957 /* UIFont+Add.swift in Sources */,
@@ -609,7 +600,6 @@
 				B6A13235281B82A700E52957 /* UIView+Add.swift in Sources */,
 				B6A13244281B82A700E52957 /* WaterflowLayout.swift in Sources */,
 				B6A13251281B82A700E52957 /* Device.swift in Sources */,
-				B6A13237281B82A700E52957 /* Value+Add.swift in Sources */,
 				B6A13233281B82A700E52957 /* UIScrollView+Add.swift in Sources */,
 				B6A133A2281B9C0300E52957 /* HUD.swift in Sources */,
 				B6A1322A281B82A700E52957 /* HomeViewController.swift in Sources */,
@@ -643,6 +633,7 @@
 				B6A13269281B875A00E52957 /* PageControl.swift in Sources */,
 				B6A1326A281B875A00E52957 /* Protocol.swift in Sources */,
 				B6A1326B281B875A00E52957 /* Console.swift in Sources */,
+				B6B48C2A28B4B3AA0041EB74 /* Slider.swift in Sources */,
 				B6A1326C281B875A00E52957 /* App.swift in Sources */,
 				B6A1326D281B875A00E52957 /* Date+Add.swift in Sources */,
 				B6A1326E281B875A00E52957 /* LocalPlayerView.swift in Sources */,
@@ -656,10 +647,8 @@
 				B6A13274281B875A00E52957 /* Dictionary+Add.swift in Sources */,
 				B6A13276281B875A00E52957 /* ProfileViewController.swift in Sources */,
 				B6A13277281B875A00E52957 /* GOMO.swift in Sources */,
-				B6A13278281B875A00E52957 /* NotificationCenter+Add.swift in Sources */,
 				B6A1339F281B9C0300E52957 /* HUD+Present.swift in Sources */,
 				B6A13279281B875A00E52957 /* UINavigationController+Add.swift in Sources */,
-				B6A1327A281B875A00E52957 /* Scanner+Add.swift in Sources */,
 				B6A1327B281B875A00E52957 /* UITabBarItem+Add.swift in Sources */,
 				B6AA7DD128260C700018FD98 /* Permission.swift in Sources */,
 				B6A133AA281B9C2100E52957 /* UIFont+Add.swift in Sources */,
@@ -668,7 +657,6 @@
 				B6A1327E281B875A00E52957 /* UIView+Add.swift in Sources */,
 				B6A1327F281B875A00E52957 /* WaterflowLayout.swift in Sources */,
 				B6A13280281B875A00E52957 /* Device.swift in Sources */,
-				B6A13281281B875A00E52957 /* Value+Add.swift in Sources */,
 				B6A13282281B875A00E52957 /* UIScrollView+Add.swift in Sources */,
 				B6A133A3281B9C0300E52957 /* HUD.swift in Sources */,
 				B6A13283281B875A00E52957 /* HomeViewController.swift in Sources */,

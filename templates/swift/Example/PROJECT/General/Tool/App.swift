@@ -64,18 +64,23 @@ extension App {
         return false
         #endif
     }
+}
+
+extension App {
     
-    /// 桌面上的应用名称，多语言
-    static var desktopName: String {
-        LocalizedKey("CFBundleDisplayName", "InfoPlist").localized
+    static var installTime: TimeInterval {
+        return Defaults[\.appInstallTimestamp]
     }
-    
+    static var isFirstLaunch: Bool { 
+        return Defaults[\.appIsFirstLauch]
+    }
     /// 以下生命周期方法 只应该在 AppDelegate 响应代理方法中调用
-    static func didLaunch() { 
+    static func didLaunch() {
         if installTime > 0 { return }
         Defaults[\.appInstallTimestamp] = Date().timeIntervalSince1970
     }
-    static func didEnterBackground() { 
+    static func didEnterBackground() {
+        Defaults[\.appIsFirstLauch] = false
     }
     static func willTerminate() {
         Defaults[\.appIsFirstLauch] = false
@@ -93,19 +98,3 @@ fileprivate extension DefaultsKeys {
     }
 }
 
-extension App {
-    
-   static var installTime: TimeInterval {
-       var installTime = Defaults[\.appInstallTimestamp]
-       if installTime > 0 { return installTime }
-       installTime = Date().timeIntervalSince1970
-       Defaults[\.appInstallTimestamp] = installTime
-       return installTime
-   }
-   static var isFirstLaunch: Bool {
-       let isFirst = Defaults[\.appIsFirstLauch]
-       if isFirst { return true }
-       Defaults[\.appIsFirstLauch] = false
-       return false
-   }
-}

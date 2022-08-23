@@ -9,14 +9,7 @@
 
 #import <sys/time.h>
  
-double OCBenchmark(void (^block)(void)) {
-    // <sys/time.h> version
-    
-#if DEVELOPMENT
-    NSLog(@"");
-#else
-    NSLog(@"");
-#endif
+double OCBenchmark(void (^block)(void)) { 
     
     struct timeval t0, t1;
     gettimeofday(&t0, NULL);

@@ -41,11 +41,35 @@ final class LocalPlayer {
         }
         self.init(player: AVPlayer(playerItem: item))
     }
+    convenience init(url: URL) {
+        self.init(player: AVPlayer(url: url))
+    }
+    convenience init(item: AVPlayerItem) {
+        self.init(player: AVPlayer(playerItem: item))
+    }
+    
+    var duration: TimeInterval? {
+        guard let item = player.currentItem else {
+            return nil
+        }
+        return TimeInterval(CMTimeGetSeconds(item.duration))
+    }
+    var current: TimeInterval? {
+        guard let item = player.currentItem else {
+            return nil
+        }
+        return TimeInterval(CMTimeGetSeconds(item.currentTime()))
+    }
+    func seek(to time: TimeInterval) {
+        let cmtime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        player.seek(to: cmtime, toleranceBefore: .zero, toleranceAfter: .zero)
+    }
     
     @discardableResult
     func play(file filename: String? = nil) -> Bool {
         if let filename = filename {
             if let item = Self.avplayerItem(with: filename) {
+                player.pause()
                 state = .changeItem
                 listener?(.changeItem)
                 player.replaceCurrentItem(with: item)
@@ -53,6 +77,7 @@ final class LocalPlayer {
                 return false
             }
         }
+        
         NotificationCenter.default.removeObserver(self)
         player.play()
         state = .playing
@@ -105,8 +130,8 @@ final class LocalPlayer {
         state = .finished
         listener?(.finished)
         player.pause()
-        player.seek(to: .zero)
         guard loop else { return }
+        player.seek(to: .zero)
         DispatchQueue.main.async {
             self.player.play()
             self.state = .playing
@@ -128,14 +153,23 @@ final class LocalPlayerView: UIView {
         get { player.loop }
     }
     
-    init(filename: String, frame: CGRect = .zero) {
+    init(player: LocalPlayer, frame: CGRect = .zero) {
+        self.player = player
         super.init(frame: frame)
-        
+        layer.addSublayer(self.player.layer)
+    }
+    convenience override init(frame: CGRect) {
+        self.init(player: LocalPlayer(), frame: frame)
+    }
+    convenience init(filename: String, frame: CGRect = .zero) {
         guard let player = LocalPlayer(filename: filename) else {
             fatalError()
         }
-        layer.addSublayer(player.layer)
-        self.player = player
+        self.init(player: player, frame: frame)
+    }
+    convenience init(url: URL, frame: CGRect = .zero) {
+        let player = LocalPlayer(url: url)
+        self.init(player: player, frame: frame)
     }
     
     override func layoutSubviews() {
@@ -149,7 +183,9 @@ final class LocalPlayerView: UIView {
         player.reset()
     }
     
-    func play(_ completion: (() -> Void)? = nil) {
+    func play(file filename: String? = nil,
+              completion: (() -> Void)? = nil) {
+        player.play(file: filename)
         if let closure = completion {
             player.listener = { event in
                 if case .finished = event {
@@ -157,15 +193,10 @@ final class LocalPlayerView: UIView {
                 }
             }
         }
-    
-        player.play()
     }
      
-    private(set) var player: LocalPlayer!
-    
-    private override init(frame: CGRect) {
-        fatalError("init(frame:) has not been implemented")
-    }
+    let player: LocalPlayer
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -8,10 +8,6 @@
 import Foundation
 
 extension String {
-    /// 是否是邮箱
-    func isEmail() -> Bool {
-        return isMatch(regEx: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")
-    }
 
     /// 是否是的验证码
     /// 数字、英语结合，8个字符
