@@ -44,6 +44,9 @@ enum BarButtonItem {
     }
 }
 class BaseViewController: UIViewController {
+    
+    private(set) var leftBarButton: UIControl?
+    private(set) var rightBarButton: UIControl?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -42,5 +42,9 @@ extension UIViewController {
     @objc func backBarButtonItemClicked() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func closeBarButtonItemClicked() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
