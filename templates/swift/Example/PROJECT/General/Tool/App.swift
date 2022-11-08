@@ -66,35 +66,41 @@ extension App {
     }
 }
 
-extension App {
+extension App { 
     
-    static var installTime: TimeInterval {
-        return Defaults[\.appInstallTimestamp]
+    private static var _isFirstLaunch = Defaults[\.appIsFirstLauch]
+    static var isFirstLaunch: Bool {
+        get { _isFirstLaunch }
+        set {  Defaults[\.appIsFirstLauch] = newValue }
     }
-    static var isFirstLaunch: Bool { 
-        return Defaults[\.appIsFirstLauch]
+    
+    private static var _isLoveDone = Defaults[\.appIsLoveDone]
+    static var isLoveDone: Bool {
+        get { _isLoveDone }
+        set {  Defaults[\.appIsLoveDone] = newValue }
     }
-    /// 以下生命周期方法 只应该在 AppDelegate 响应代理方法中调用
-    static func didLaunch() {
-        if installTime > 0 { return }
-        Defaults[\.appInstallTimestamp] = Date().timeIntervalSince1970
-    }
-    static func didEnterBackground() {
-        Defaults[\.appIsFirstLauch] = false
-    }
-    static func willTerminate() {
-        Defaults[\.appIsFirstLauch] = false
+    private static var _isReviewed = Defaults[\.appReviewed]
+    static var isReviewed: Bool {
+        get { _isReviewed }
+        set {
+            _isReviewed = newValue;
+            Defaults[\.appReviewed] = newValue
+        }
     }
 }
+ 
 
 import SwiftyUserDefaults
 
 fileprivate extension DefaultsKeys {
-    var appInstallTimestamp: DefaultsKey<TimeInterval> {
-        .init("appInstallTimestamp", defaultValue: 0)
+    var appReviewed: DefaultsKey<Bool> {
+        .init("appHasReviewed", defaultValue: false)
     }
     var appIsFirstLauch: DefaultsKey<Bool> {
         .init("appIsFirstLauch", defaultValue: true)
+    }
+    var appIsLoveDone: DefaultsKey<Bool> {
+        .init("appIsLoveDone", defaultValue: false)
     }
 }
 

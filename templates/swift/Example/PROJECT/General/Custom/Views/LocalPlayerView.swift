@@ -8,7 +8,10 @@
 import UIKit
 import AVFoundation
 
-final class LocalPlayer {
+import AVFoundation
+import SwifterKnife
+
+final class LocalPlayer: NSObject {
     enum State {
         case paused
         case changeItem
@@ -17,12 +20,16 @@ final class LocalPlayer {
         case reset
     }
     private(set) var layer: AVPlayerLayer
-    private var player: AVPlayer
+    private(set) var player: AVPlayer
     private var state: State = .paused
     
     var listener: ((State) -> Void)?
     var loop = false
     
+    var isMuted: Bool {
+        get { player.isMuted }
+        set { player.isMuted = newValue }
+    }
     init(player: AVPlayer) {
         self.player = player
         player.isMuted = true
@@ -31,8 +38,13 @@ final class LocalPlayer {
             $0.shouldRasterize = true
             $0.rasterizationScale = UIScreen.main.scale
         }
+        super.init()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEnd(_:)), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
-    convenience init() {
+    convenience override init() {
         self.init(player: AVPlayer())
     }
     convenience init?(filename: String) {
@@ -48,6 +60,13 @@ final class LocalPlayer {
         self.init(player: AVPlayer(playerItem: item))
     }
     
+    var size: CGSize? {
+        guard let item = player.currentItem,
+              let size = item.asset.tracks(withMediaType: .video).first?.naturalSize else {
+                  return nil
+              }
+        return size * 0.5
+    }
     var duration: TimeInterval? {
         guard let item = player.currentItem else {
             return nil
@@ -60,13 +79,42 @@ final class LocalPlayer {
         }
         return TimeInterval(CMTimeGetSeconds(item.currentTime()))
     }
+    var error: Error? {
+        if let item = player.currentItem,
+           let error = item.error { return error }
+        return player.error
+    }
     func seek(to time: TimeInterval) {
         let cmtime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         player.seek(to: cmtime, toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
+    private var playCompletion: ((Error?) -> Void)?
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard let item = object as? AVPlayerItem,
+              item === player.currentItem else {
+                  return
+              }
+        if keyPath == "status" {
+            item.removeObserver(self, forKeyPath: "status")
+            switch item.status {
+            case .readyToPlay:
+                player.play()
+                state = .playing
+                listener?(.playing)
+                playCompletion?(nil)
+            default:
+                let error = item.error ?? player.error
+                Console.trace("play failed \(String(describing: error))")
+                playCompletion?(error)
+            }
+            playCompletion = nil
+        }
+    }
+    
     @discardableResult
-    func play(file filename: String? = nil) -> Bool {
+    func play(file filename: String? = nil,
+              completion: ((Error?) -> Void)? = nil) -> Bool {
         if let filename = filename {
             if let item = Self.avplayerItem(with: filename) {
                 player.pause()
@@ -74,22 +122,38 @@ final class LocalPlayer {
                 listener?(.changeItem)
                 player.replaceCurrentItem(with: item)
             } else {
+                completion?(NSError(domain: AVFoundationErrorDomain, code: -12121, userInfo: [NSLocalizedDescriptionKey: "create AVPlayerItem failed"]))
                 return false
             }
         }
-        
-        NotificationCenter.default.removeObserver(self)
-        player.play()
-        state = .playing
-        listener?(.playing)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEnd(_:)), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        AVAudioSession.sharedInstance().do {
-            try? $0.setCategory(.ambient, options: [.mixWithOthers, .defaultToSpeaker])
-            try? $0.setActive(true)
+        guard let item = player.currentItem else {
+            completion?(NSError(domain: AVFoundationErrorDomain, code: -12122, userInfo: [NSLocalizedDescriptionKey: "no current play item"]))
+            return false
         }
-        return true
+        switch item.status {
+        case .failed:
+            completion?(item.error ?? player.error)
+            return false
+        case .readyToPlay:
+            player.play()
+            state = .playing
+            listener?(.playing)
+            completion?(nil)
+            return true
+        case .unknown:
+//            item.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+//            playCompletion = completion
+            DispatchQueue.main.async {
+                self.player.play()
+                self.state = .playing
+                self.listener?(.playing)
+                completion?(nil)
+            }
+            return true
+        @unknown default:
+            completion?(item.error ?? player.error)
+            return false
+        }
     }
     private var needResume = false
     @objc private func appDidEnterBackground() {
@@ -112,7 +176,6 @@ final class LocalPlayer {
         listener?(.paused)
     }
     func reset() {
-        NotificationCenter.default.removeObserver(self)
         player.pause()
         player.seek(to: .zero)
         state = .reset
@@ -121,12 +184,13 @@ final class LocalPlayer {
     }
     deinit {
         Console.log("\(type(of: self)) deinit")
+//        removeStatusListen()
         NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func didPlayToEnd(_ noti: Notification) {
         guard let item = noti.object as? AVPlayerItem else { return }
-        if item != player.currentItem { return }
+        guard item === player.currentItem else { return }
         state = .finished
         listener?(.finished)
         player.pause()
@@ -172,9 +236,17 @@ final class LocalPlayerView: UIView {
         self.init(player: player, frame: frame)
     }
     
+    var isMuted: Bool {
+        get { player.isMuted }
+        set { player.isMuted = newValue }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         player.layer.frame = bounds
+    }
+    override var intrinsicContentSize: CGSize {
+        player.size ?? super.intrinsicContentSize
     }
     func pause() {
         player.pause()
@@ -183,10 +255,14 @@ final class LocalPlayerView: UIView {
         player.reset()
     }
     
+    func playCallbacked(file filename: String? = nil,
+                        callback: @escaping (Error?) -> Void) {
+        player.play(file: filename, completion: callback)
+    }
     func play(file filename: String? = nil,
-              completion: (() -> Void)? = nil) {
+              finished: (() -> Void)? = nil) {
         player.play(file: filename)
-        if let closure = completion {
+        if let closure = finished {
             player.listener = { event in
                 if case .finished = event {
                     closure()
@@ -194,10 +270,12 @@ final class LocalPlayerView: UIView {
             }
         }
     }
-     
+    
     let player: LocalPlayer
-     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

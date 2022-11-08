@@ -12,9 +12,8 @@ use_frameworks!
 
 def commonPods
   pod 'SwiftyUserDefaults' 
-  pod 'YYKit'
-  pod 'Moya' 
-    
+  
+  pod 'YYKit', :git => 'https://github.com/CoderLouie/YYKit.git', :branch => 'develop'
   pod 'SwifterKnife', :git => 'https://github.com/CoderLouie/SwifterKnife.git', :branch => 'develop'
   pod 'SnapKit', :git => 'https://github.com/CoderLouie/SnapKit.git', :branch => 'my_source'
 end
