@@ -16,6 +16,8 @@ def commonPods
   pod 'YYKit', :git => 'https://github.com/CoderLouie/YYKit.git', :branch => 'develop'
   pod 'SwifterKnife', :git => 'https://github.com/CoderLouie/SwifterKnife.git', :branch => 'develop'
   pod 'SnapKit', :git => 'https://github.com/CoderLouie/SnapKit.git', :branch => 'my_source'
+  pod 'lottie-ios'
+
 end
 
 target '${POD_NAME}_dev' do
