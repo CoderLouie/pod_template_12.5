@@ -32,7 +32,7 @@
 		B6A13250281B82A700E52957 /* ObjectUnicode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1321E281B82A700E52957 /* ObjectUnicode.swift */; };
 		B6A13251281B82A700E52957 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1321F281B82A700E52957 /* Device.swift */; };
 		B6A13252281B82A700E52957 /* OCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A13220281B82A700E52957 /* OCUtils.m */; };
-		B6A13253281B82A700E52957 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13221281B82A700E52957 /* App.swift */; };
+		B6A13253281B82A700E52957 /* App+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13221281B82A700E52957 /* App+Add.swift */; };
 		B6A1325C281B84DC00E52957 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1325B281B84DC00E52957 /* Constant.swift */; };
 		B6A13261281B875A00E52957 /* OCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A13220281B82A700E52957 /* OCUtils.m */; };
 		B6A13263281B875A00E52957 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1325B281B84DC00E52957 /* Constant.swift */; };
@@ -43,7 +43,7 @@
 		B6A13269281B875A00E52957 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13213281B82A700E52957 /* PageControl.swift */; };
 		B6A1326A281B875A00E52957 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1320A281B82A700E52957 /* Protocol.swift */; };
 		B6A1326B281B875A00E52957 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1321B281B82A700E52957 /* Console.swift */; };
-		B6A1326C281B875A00E52957 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13221281B82A700E52957 /* App.swift */; };
+		B6A1326C281B875A00E52957 /* App+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13221281B82A700E52957 /* App+Add.swift */; };
 		B6A1326E281B875A00E52957 /* LocalPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13214281B82A700E52957 /* LocalPlayerView.swift */; };
 		B6A1326F281B875A00E52957 /* UIColor+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13208281B82A700E52957 /* UIColor+Config.swift */; };
 		B6A13270281B875A00E52957 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A13217281B82A700E52957 /* BaseView.swift */; };
@@ -126,7 +126,7 @@
 		B6A1321E281B82A700E52957 /* ObjectUnicode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectUnicode.swift; sourceTree = "<group>"; };
 		B6A1321F281B82A700E52957 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		B6A13220281B82A700E52957 /* OCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUtils.m; sourceTree = "<group>"; };
-		B6A13221281B82A700E52957 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		B6A13221281B82A700E52957 /* App+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "App+Add.swift"; sourceTree = "<group>"; };
 		B6A1325B281B84DC00E52957 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B6A1325D281B86DF00E52957 /* PROJECT-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PROJECT-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6A1325E281B86DF00E52957 /* OC_Call_Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OC_Call_Swift.h; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 		B6A13218281B82A700E52957 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				B6A13221281B82A700E52957 /* App.swift */,
+				B6A13221281B82A700E52957 /* App+Add.swift */,
 				B6A1321B281B82A700E52957 /* Console.swift */,
 				B6A13219281B82A700E52957 /* OCUtils.h */,
 				B6A13220281B82A700E52957 /* OCUtils.m */,
@@ -543,7 +543,7 @@
 				B6A13242281B82A700E52957 /* Protocol.swift in Sources */,
 				B6A1324D281B82A700E52957 /* Console.swift in Sources */,
 				B6B48C2928B4B3AA0041EB74 /* Slider.swift in Sources */,
-				B6A13253281B82A700E52957 /* App.swift in Sources */,
+				B6A13253281B82A700E52957 /* App+Add.swift in Sources */,
 				B6A13249281B82A700E52957 /* LocalPlayerView.swift in Sources */,
 				B6A13241281B82A700E52957 /* UIColor+Config.swift in Sources */,
 				B6A1324B281B82A700E52957 /* BaseView.swift in Sources */,
@@ -590,7 +590,7 @@
 				B6A1326A281B875A00E52957 /* Protocol.swift in Sources */,
 				B6A1326B281B875A00E52957 /* Console.swift in Sources */,
 				B6B48C2A28B4B3AA0041EB74 /* Slider.swift in Sources */,
-				B6A1326C281B875A00E52957 /* App.swift in Sources */,
+				B6A1326C281B875A00E52957 /* App+Add.swift in Sources */,
 				B6A1326E281B875A00E52957 /* LocalPlayerView.swift in Sources */,
 				B6A1326F281B875A00E52957 /* UIColor+Config.swift in Sources */,
 				B6A13270281B875A00E52957 /* BaseView.swift in Sources */,
@@ -831,6 +831,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gomo.PROJECT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PROJECT/Other/PROJECT-Bridging-Header.h";
@@ -851,6 +852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gomo.PROJECT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PROJECT/Other/PROJECT-Bridging-Header.h";

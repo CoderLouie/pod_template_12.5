@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  App+Add.swift
 //  PROJECT
 //
 //  Created by USER_NAME on TODAYS_DATE.
@@ -49,7 +49,7 @@ extension App {
         #if DEVELOPMENT
         return true
         #else
-        return false
+        return true
         #endif
     }
     /// 是否是我们平常开发写代码的调试模式
