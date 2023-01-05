@@ -26,8 +26,8 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
- Pods/
- *.xcworkspace
+ # Pods/
+ # *.xcworkspace
 
 Carthage/Build
 fastlane/report.xml
