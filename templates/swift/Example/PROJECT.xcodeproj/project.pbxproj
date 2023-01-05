@@ -93,6 +93,8 @@
 		B6AA7DD128260C700018FD98 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA7DCF28260C700018FD98 /* Permission.swift */; };
 		B6B48C2928B4B3AA0041EB74 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B48C2828B4B3AA0041EB74 /* Slider.swift */; };
 		B6B48C2A28B4B3AA0041EB74 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B48C2828B4B3AA0041EB74 /* Slider.swift */; };
+		B6CB888C2966DC4800E8110A /* ExceptionCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CB888B2966DC4800E8110A /* ExceptionCatcher.swift */; };
+		B6CB888D2966DC4800E8110A /* ExceptionCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CB888B2966DC4800E8110A /* ExceptionCatcher.swift */; };
 		B6FD60C6291A00E4005BCB57 /* ThridSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD60C5291A00E4005BCB57 /* ThridSDK.swift */; };
 		B6FD60C7291A00E4005BCB57 /* ThridSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD60C5291A00E4005BCB57 /* ThridSDK.swift */; };
 /* End PBXBuildFile section */
@@ -151,6 +153,7 @@
 		B6A1348F281B9ED100E52957 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B6AA7DCF28260C700018FD98 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		B6B48C2828B4B3AA0041EB74 /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		B6CB888B2966DC4800E8110A /* ExceptionCatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionCatcher.swift; sourceTree = "<group>"; };
 		B6FD60C5291A00E4005BCB57 /* ThridSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThridSDK.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +388,7 @@
 				B6A1321E281B82A700E52957 /* ObjectUnicode.swift */,
 				B6A1347C281B9E2F00E52957 /* Language.swift */,
 				B6AA7DCF28260C700018FD98 /* Permission.swift */,
+				B6CB888B2966DC4800E8110A /* ExceptionCatcher.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -562,6 +566,7 @@
 				B6A13251281B82A700E52957 /* Device.swift in Sources */,
 				B6A133A2281B9C0300E52957 /* HUD.swift in Sources */,
 				B6A1322A281B82A700E52957 /* HomeViewController.swift in Sources */,
+				B6CB888C2966DC4800E8110A /* ExceptionCatcher.swift in Sources */,
 				B6A1347D281B9E2F00E52957 /* Language.swift in Sources */,
 				B6A1322C281B82A700E52957 /* DebugViewController.swift in Sources */,
 				B6A133AC281B9C5700E52957 /* LoadingView.swift in Sources */,
@@ -609,6 +614,7 @@
 				B6A13280281B875A00E52957 /* Device.swift in Sources */,
 				B6A133A3281B9C0300E52957 /* HUD.swift in Sources */,
 				B6A13283281B875A00E52957 /* HomeViewController.swift in Sources */,
+				B6CB888D2966DC4800E8110A /* ExceptionCatcher.swift in Sources */,
 				B6A1347E281B9E2F00E52957 /* Language.swift in Sources */,
 				B6A13284281B875A00E52957 /* DebugViewController.swift in Sources */,
 				B6A133AD281B9C5700E52957 /* LoadingView.swift in Sources */,
