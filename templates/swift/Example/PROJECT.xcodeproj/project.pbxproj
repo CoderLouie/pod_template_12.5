@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B66414E22990E4AB0071C0FA /* HUD+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66414E12990E4AB0071C0FA /* HUD+Content.swift */; };
+		B66414E32990E4AB0071C0FA /* HUD+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66414E12990E4AB0071C0FA /* HUD+Content.swift */; };
 		B6A131D1281B81A800E52957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A131D0281B81A800E52957 /* AppDelegate.swift */; };
 		B6A131DA281B81AA00E52957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A131D9281B81AA00E52957 /* Assets.xcassets */; };
 		B6A131DD281B81AA00E52957 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A131DB281B81AA00E52957 /* LaunchScreen.storyboard */; };
@@ -100,6 +102,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B66414E12990E4AB0071C0FA /* HUD+Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HUD+Content.swift"; sourceTree = "<group>"; };
 		B6A131CD281B81A800E52957 /* PROJECT_dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PROJECT_dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A131D0281B81A800E52957 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6A131D9281B81AA00E52957 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -397,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				B6A13393281B9C0300E52957 /* HUD.swift */,
+				B66414E12990E4AB0071C0FA /* HUD+Content.swift */,
 				B6A1338E281B9C0300E52957 /* HUD+Action.swift */,
 				B6A1338D281B9C0300E52957 /* HUD+Alert.swift */,
 				B6A13395281B9C0300E52957 /* HUD+Loading.swift */,
@@ -571,6 +575,7 @@
 				B6A1322C281B82A700E52957 /* DebugViewController.swift in Sources */,
 				B6A133AC281B9C5700E52957 /* LoadingView.swift in Sources */,
 				B6A1339A281B9C0300E52957 /* HUD+Sheet.swift in Sources */,
+				B66414E22990E4AB0071C0FA /* HUD+Content.swift in Sources */,
 				B6A13250281B82A700E52957 /* ObjectUnicode.swift in Sources */,
 				B6A1323E281B82A700E52957 /* Array+Add.swift in Sources */,
 				B6FD60C6291A00E4005BCB57 /* ThridSDK.swift in Sources */,
@@ -619,6 +624,7 @@
 				B6A13284281B875A00E52957 /* DebugViewController.swift in Sources */,
 				B6A133AD281B9C5700E52957 /* LoadingView.swift in Sources */,
 				B6A1339B281B9C0300E52957 /* HUD+Sheet.swift in Sources */,
+				B66414E32990E4AB0071C0FA /* HUD+Content.swift in Sources */,
 				B6A13286281B875A00E52957 /* ObjectUnicode.swift in Sources */,
 				B6A13287281B875A00E52957 /* Array+Add.swift in Sources */,
 				B6FD60C7291A00E4005BCB57 /* ThridSDK.swift in Sources */,

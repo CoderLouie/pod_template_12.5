@@ -14,8 +14,8 @@ let h12 = 12.fit
 let h14 = 14.fit
 let h16 = 16.fit
 let h18 = 18.fit
-let h20 = 20.fit
-let h30 = 20.fit
+var h20: CGFloat { h10 * 2 }
+var h30: CGFloat { h10 * 3 }
 
 /// 垂直常用间距
 let v10: CGFloat = 10

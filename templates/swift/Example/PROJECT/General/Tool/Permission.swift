@@ -235,28 +235,47 @@ extension Permission {
             }
         }
     }
+    
+    public enum UpdateLocationError: Error {
+        case core(Error)
+        case authority(AuthorizationStatus)
+    }
+    public struct Placemark: CustomStringConvertible {
+        public let coordinate: CLLocationCoordinate2D
+        public let placemark: CLPlacemark
+        public var description: String {
+            "coordinate: \(coordinate), placemark: \(placemark)"
+        }
+    }
     public static func updateLocation(
         way: AuthorizationStatus.LocationWay,
-        completion: @escaping (Result<[String: String], Error>?, AuthorizationStatus, Bool) -> Void) {
+        completion: @escaping (Result<Placemark, UpdateLocationError>, Bool) -> Void) {
         _requestLocation(way: way) { status, isFirst in
             if case .location = status {
                 locationManager.updateLocation { result in
                     DispatchQueue.main.async {
-                        completion(result, status, isFirst)
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(.core(error)), isFirst)
+                        case .success(let res):
+                            completion(.success(res), isFirst)
+                        }
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    completion(nil, status, isFirst)
+                    completion(.failure(.authority(status)), isFirst)
                 }
             }
         }
     }
     
+    
     private final class LocationManager: NSObject, CLLocationManagerDelegate {
         let manager: CLLocationManager
         var authorization: ((AuthorizationStatus) -> Void)?
-        var location: ((Result<[String: String], Error>) -> Void)?
+        var updateLocations: [(Result<Placemark, Error>) -> Void] = []
+        var isUpdating = false
         
         override init() {
             manager = CLLocationManager()
@@ -275,28 +294,36 @@ extension Permission {
                 manager.requestAlwaysAuthorization()
             }
         }
-        func updateLocation(completion: @escaping (Result<[String: String], Error>) -> Void) {
-            guard location == nil else { return }
-            location = completion
+        func updateLocation(completion: @escaping (Result<Placemark, Error>) -> Void) {
+            updateLocations.append(completion)
+            if isUpdating { return }
+            isUpdating = true
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.startUpdatingLocation()
         }
-        private func endUpdate(result: Result<[String: String], Error>) {
-            location?(result)
-            location = nil
+        private func endUpdate(result: Result<Placemark, Error>) {
+            isUpdating = false
+            let closures = updateLocations
+            updateLocations = []
+            for c in closures { c(result) }
         }
         // MARK: CLLocationManagerDelegate
         func locationManager(
             _ manager: CLLocationManager,
             didChangeAuthorization status: CLAuthorizationStatus) {
             if let newStatus = AuthorizationStatus(locationStatus: status) {
-                authorization?(newStatus)
+                let closure = authorization
+                authorization = nil
+                closure?(newStatus)
             }
+        }
+        func clerror(_ code: CLError.Code) -> NSError {
+            NSError(domain: CLError.errorDomain, code: code.rawValue, userInfo: nil)
         }
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             manager.stopUpdatingLocation()
             guard let location = locations.first else {
-                endUpdate(result: .success([:]))
+                endUpdate(result: .failure(clerror(.locationUnknown)))
                 return
             }
             let latitude = location.coordinate.latitude
@@ -309,14 +336,13 @@ extension Permission {
                     self.endUpdate(result: .failure(geoError))
                     return
                 }
-                guard let addressInfo = placemarks?.first?.addressDictionary else {
-                    self.endUpdate(result: .success([:]))
+                guard let placemark = placemarks?.first,
+                let loc = placemark.location else {
+                    self.endUpdate(result: .failure(self.clerror(.locationUnknown)))
                     return
                 }
-                var res: [String: String] = ["coordinate": "\(latitude),\(longitude)"]
-                if let cityName = addressInfo["City"] as? String {
-                    res["cityName"] = cityName
-                }
+                
+                let res = Placemark(coordinate: loc.coordinate, placemark: placemark)
                 self.endUpdate(result: .success(res))
             }
              

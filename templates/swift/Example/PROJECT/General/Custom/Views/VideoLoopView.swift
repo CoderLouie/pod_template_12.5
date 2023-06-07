@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class VideoLoopView: UIView {
 
     var autoPlayNext: Bool = true
@@ -73,9 +74,9 @@ extension VideoLoopView: CarouselViewDelegate {
         player.play()
     }
 
-    func carouselView(_ carouselView: CarouselView, didDeselect cell: CarouselViewCell, at index: Int) {
-        videoList[index].reset()
-    }
+//    func carouselView(_ carouselView: CarouselView, didDeselect cell: CarouselViewCell, at index: Int) {
+//        videoList[index].reset()
+//    }
     
     func carouselView(_ carouselView: CarouselView, willAppear cell: CarouselViewCell, at index: Int) {
         guard let videoCell = cell as? VideoLoopCell else {

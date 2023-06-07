@@ -9,14 +9,11 @@ import Foundation
 
 
 extension HUD {
-    class ActionView: HUD.BaseView {
+    class ActionView: HUD.ContentView {
         enum ActionStyle {
             case theme, white, border
         }
-        
-        var subscribeKeyboardChangeFrameEvent: Bool {
-            return false
-        } 
+         
         var topContainerEdgeInset: UIEdgeInsets {
             .init(top: 28.fit, left: h20, bottom: 0, right: h20)
         }
@@ -27,40 +24,12 @@ extension HUD {
             false
         }
         var closeAction: (() -> Void)?
-        
-        @objc private func keyboardWillChangeFrame(_ notify: Notification) {
-            let rect = notify.userInfo?[UIApplication.keyboardFrameEndUserInfoKey] as? CGRect
-            let keyboardH = rect?.height ?? 366
-            let show: Bool = (rect?.minY ?? 0) < Screen.height
-            let duration: TimeInterval = notify.userInfo?[UIApplication.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
-            
-            UIView.animate(withDuration: max(duration, 0.25)) {
-                if show {
-                    let frame = self.contentView.frame
-                    let delta = keyboardH - (Screen.height - frame.maxY) + 10
-                    guard delta > 0 else { return }
-                    self.contentView.transform = CGAffineTransform(translationX: 0, y: -delta)
-                } else {
-                    self.contentView.transform  = .identity
-                }
-            }
-        }
+         
         
         internal override func setup() {
             super.setup()
             
-            if subscribeKeyboardChangeFrameEvent {
-                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: UIApplication.keyboardWillChangeFrameNotification, object: nil)
-            }
-            
             backgroundColor = UIColor(gray: 0, alpha: 0.4)
-
-            contentView = UIView().then {
-                $0.layer.masksToBounds = true
-                $0.layer.cornerRadius = 15.fit
-                $0.backgroundColor = .white
-                addSubview($0)
-            }
             
             let tInset = topContainerEdgeInset
             
@@ -140,7 +109,7 @@ extension HUD {
             addAction(title, config: {
                 switch style {
                 case .theme:
-                    $0.backgroundColor = .theme
+                    $0.backgroundColor = .accentBlue
                     $0.titleLabel?.font = .system20
                     $0.setTitleColor(.white, for: .normal)
                     $0.layer.cornerRadius = 27
@@ -152,66 +121,21 @@ extension HUD {
                 case .border:
                     $0.backgroundColor = .white
                     $0.titleLabel?.font = .system20
-                    $0.setTitleColor(.theme, for: .normal)
+                    $0.setTitleColor(.accentBlue, for: .normal)
                     $0.layer.cornerRadius = 27
                     $0.layer.masksToBounds = true
-                    $0.layer.borderColor = UIColor.theme.cgColor
+                    $0.layer.borderColor = UIColor.accentBlue.cgColor
                     $0.layer.borderWidth = 1
                 }
                 $0.setTitle(title, for: .normal)
             }, vOffset: vOffset, closure: closure)
         }
         
-        func show(on view: UIView) {
-            frame = view.bounds
-            view.addSubview(self)
-            
-            var size = contentView.bounds.size
-            if size.isEmpty {
-                layoutIfNeeded()
-                size = contentView.bounds.size
-            }
-            
-            doAnimation(true, contentSize: size) {
-                
-            }
-        }
-        func dismiss(completion: @escaping () -> Void) {
-            let size = contentView.bounds.size
-            doAnimation(false, contentSize: size) {
-                completion()
-                self.removeFromSuperview()
-            }
-        }
-        
-        func doAnimation(_ show: Bool,
-                         contentSize size: CGSize,
-                         completion: @escaping () -> Void) {
-            completion()
-        }
-        private(set) unowned var contentView: UIView!
         private(set) unowned var topContainer: VirtualView!
         private(set) unowned var bottomContainer: VirtualView!
     }
     
-    
-    
     enum Action {
-        static func show<T: HUD.ActionView>
-        (config: (T) -> Void,
-         actions: (T) -> Void) {
-            guard let window = HUD.window else { return }
-            let view = T()
-            config(view)
-            actions(view)
-            guard let last = view.bottomContainer.subviews.last else {
-                fatalError("must add at least one action button")
-            }
-            last.snp.makeConstraints { make in
-                make.bottom.equalTo(0)
-            }
-            view.show(on: window)
-        }
         
         static func show<T: HUD.ActionView>(
             topLevel: Bool = false,
