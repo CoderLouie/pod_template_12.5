@@ -60,7 +60,7 @@ extension HUD {
             backgroundColor = UIColor(gray: 0, alpha: 0.6)
             
             #if canImport(Lottie)
-            AnimationView(filePath: animPath).do {
+            LottieAnimationView(filePath: animPath).do {
                 $0.loopMode = .loop
                 $0.contentMode = .scaleAspectFill
                 addSubview($0)

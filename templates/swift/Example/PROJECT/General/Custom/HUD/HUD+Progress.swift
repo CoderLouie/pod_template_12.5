@@ -78,8 +78,8 @@ extension HUD {
 //                $0.lineCap = .round
                 $0.strokeEnd = 0
             }
-             
-            let midColor = UIColor(hexString: "#9AEE98")!
+            
+//            let midColor: UIColor = .create("#9AEE98")
             CALayer().do {
                 // 右边
                 $0.addSublayer(CAGradientLayer().then {

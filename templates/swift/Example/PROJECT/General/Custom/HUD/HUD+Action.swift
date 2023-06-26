@@ -109,7 +109,7 @@ extension HUD {
             addAction(title, config: {
                 switch style {
                 case .theme:
-                    $0.backgroundColor = .accentBlue
+//                    $0.backgroundColor = .accentBlue
                     $0.titleLabel?.font = .system20
                     $0.setTitleColor(.white, for: .normal)
                     $0.layer.cornerRadius = 27
@@ -121,10 +121,10 @@ extension HUD {
                 case .border:
                     $0.backgroundColor = .white
                     $0.titleLabel?.font = .system20
-                    $0.setTitleColor(.accentBlue, for: .normal)
+//                    $0.setTitleColor(.accentBlue, for: .normal)
                     $0.layer.cornerRadius = 27
                     $0.layer.masksToBounds = true
-                    $0.layer.borderColor = UIColor.accentBlue.cgColor
+//                    $0.layer.borderColor = UIColor.accentBlue.cgColor
                     $0.layer.borderWidth = 1
                 }
                 $0.setTitle(title, for: .normal)

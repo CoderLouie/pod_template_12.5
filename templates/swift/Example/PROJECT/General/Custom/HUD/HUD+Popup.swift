@@ -22,17 +22,14 @@ extension HUD {
         var arrowSize = CGSize(width: 12, height: 8)
         var distanceBetweenSource: CGFloat = 5
         
-        var outlineColor = UIColor(gray: 225)
-        var outlineWidth: CGFloat = 1
+        var outlineColor: UIColor? = UIColor(gray: 225)
+        var outlineWidth: CGFloat = 0
         var outlineRadius: CGFloat = 5
         
         weak var sourceView: UIView?
         var sourceRect: CGRect?
         
         var contentBgColor: UIColor = .white
-        var maskBgColor: UIColor?
-        
-        var automaticallyHidesWhenTapMask = true
         
         private(set) var direction: ArrowDirection?
         private(set) unowned var contentView: UIView!
@@ -52,21 +49,7 @@ extension HUD {
         func show(_ direction: ArrowDirection? = nil, on view: UIView) {
             guard let contentView = contentView else { return }
             
-            if let maskBgColor = maskBgColor {
-                HUD.MaskView(style: .plain).do {
-                    if self.automaticallyHidesWhenTapMask {
-                        $0.tapAction = { mask in
-                            mask.removeFromSuperview()
-                        }
-                    }
-                    $0.backgroundColor = maskBgColor
-                    $0.frame = view.bounds
-                    view.addSubview($0)
-                    $0.addSubview(self)
-                }
-            } else {
-                view.addSubview(self)
-            }
+            view.addSubview(self)
             
             let screenBounds = UIScreen.main.bounds
             let screenSize = screenBounds.size
@@ -217,7 +200,7 @@ extension HUD {
             shapeLayer.do {
                 $0.path = path.cgPath
                 $0.fillColor = contentBgColor.cgColor
-                $0.strokeColor = outlineColor.cgColor
+                $0.strokeColor = outlineColor?.cgColor
                 $0.lineWidth = outlineWidth
             }
             backgroundColor = .clear
@@ -262,16 +245,7 @@ extension HUD {
     enum Popup {
     }
 }
-
-// MARK: - Menu
-extension HUD.Popup {
-    static func show(menu: String) {
-        
-    }
-    static func dismissMenu() {
-        prevTips?.dismiss()
-    }
-}
+ 
 
 // MARK: - Tips
 extension HUD.Popup {
@@ -287,14 +261,7 @@ extension HUD.Popup {
         tipsView.show(direction, on: window)
         prevTips = tipsView
     }
-    static func show(tips: String, direction: HUD.ArrowDirection? = nil, config: (HUD.PopupTips) -> Void) {
-        guard let window = HUD.window else { return }
-        prevTips?.dismiss()
-        let tipsView = HUD.PopupTips().then(config)
-        tipsView.show(direction, on: window)
-        prevTips = tipsView
-    }
-    static func dismissTips() {
+    static func dismiss() {
         prevTips?.dismiss()
     }
 }
