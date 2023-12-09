@@ -122,7 +122,7 @@ extension HUD {
             case indicator(UIActivityIndicatorView.Style = .whiteLarge, blur: UIBlurEffect.Style = .light)
             case builtln
         }
-        private static var previousLoadingView: LoadingViewAction?
+        private static weak var previousLoadingView: LoadingViewAction?
         
         /// topLevel为true表示显示级别和订阅页一样
         static func show(_ style: Style = .builtln, topLevel: Bool = false) {

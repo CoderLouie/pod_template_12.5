@@ -1,18 +1,60 @@
 //
 //  HUD+Action.swift
-//  PROJECT
+//  Chatbabe
 //
-//  Created by USER_NAME on TODAYS_DATE.
+//  Created by 李阳 on 2023/06/07.
 //
 
 import Foundation
+import UIKit
+import SwifterKnife
+
+protocol HUDActionAdded: AnyObject {
+    
+    func dismiss(completion: (() -> Void)?)
+    func afterAddButton(_ button: UIControl, _ vOffset: CGFloat?)
+}
+extension HUDActionAdded {
+    func _addAction(_ button: UIControl,
+                    vOffset: CGFloat? = nil,
+                    closure: @escaping (Self, UIButton) -> Void) -> TPButton {
+        button.addTouchUpInsideClosure { [unowned self] sender, event in
+            closure(self, sender)
+        }
+        afterAddTPButton($0, vOffset)
+    }
+    
+    @discardableResult
+    func addAction(_ button: UIControl,
+                   vOffset: CGFloat? = nil,
+                   closure: (() -> Void)? = nil) -> TPButton {
+        _addAction(button, vOffset: vOffset) { this, _ in
+            this.dismiss(completion: closure)
+        }
+    }
+    @discardableResult
+    func addAction1(_ button: UIControl,
+                    vOffset: CGFloat? = nil,
+                    closure: @escaping (Self) -> Void) -> TPButton {
+        _addAction(button, vOffset: vOffset) { this, _ in
+            closure(this)
+        }
+    }
+    @discardableResult
+    func addAction2(_ button: UIControl,
+                    vOffset: CGFloat? = nil,
+                    closure: @escaping (Self, TPButton) -> Void) -> TPButton {
+        _addAction(button, vOffset: vOffset) { this, sender in
+            this.dismiss {
+                closure(this, sender)
+            }
+        }
+    }
+}
 
 
 extension HUD {
-    class ActionView: HUD.ContentView {
-        enum ActionStyle {
-            case theme, white, border
-        }
+    class ActionView: HUD.ContentView, HUDActionAdded {
          
         var topContainerEdgeInset: UIEdgeInsets {
             .init(top: 28.fit, left: h20, bottom: 0, right: h20)
@@ -20,13 +62,8 @@ extension HUD {
         var bottomContainerEdgeInset: UIEdgeInsets {
             .init(top: h20, left: h20, bottom: h20, right: h20)
         }
-        var shouldAddLeftTopCloseButton: Bool {
-            false
-        }
-        var closeAction: (() -> Void)?
-         
         
-        internal override func setup() {
+        override func setup() {
             super.setup()
             
             backgroundColor = UIColor(gray: 0, alpha: 0.4)
@@ -42,7 +79,8 @@ extension HUD {
                 }
             }
             let bInset = bottomContainerEdgeInset
-            bottomContainer = VirtualView().then {
+            bottomContainer = .vertical.then {
+                $0.alignment = .fill
                 contentView.addSubview($0)
                 $0.snp.makeConstraints { make in
                     make.top.equalTo(topContainer.snp.bottom).offset(bInset.top)
@@ -51,108 +89,17 @@ extension HUD {
                     make.bottom.equalTo(-bInset.bottom)
                 }
             }
-            guard shouldAddLeftTopCloseButton else { return }
-            
-            DispatchQueue.main.async {
-                UIButton().do {
-                    $0.setImage(UIImage(named: "ic_close"), for: .normal)
-                    $0.addBlock(for: .touchUpInside) { [unowned self] _ in
-                        self.dismiss { [unowned self] in
-                            self.closeAction?()
-                        }
-                    }
-                    self.contentView.addSubview($0)
-                    $0.snp.makeConstraints { make in
-                        make.leading.equalTo(h12)
-                        make.top.equalTo(h12)
-                        make.width.height.equalTo(26)
-                    }
-                }
-            }
         }
-        @discardableResult
-        func addAction(_ title: String,
-                       config: (UIButton) -> Void,
-                       vOffset: CGFloat = 0,
-                       closure: (() -> Void)? = nil) -> UIButton {
-            UIButton().then {
-                config($0)
-                guard $0.allTargets.isEmpty else {
-                    fatalError("use the closure param")
-                }
-                $0.addBlock(for: .touchUpInside) { [unowned self] _ in
-                    self.dismiss {
-                        closure?()
-                    }
-                }
-                bottomContainer.addSubview($0)
-                $0.snp.makeConstraints { make in
-                    make.width.equalToSuperview()
-                    make.centerX.equalToSuperview()
-                    make.height.equalTo(54)
-                    let n = bottomContainer.subviews.count - 1
-                    if n == 0 {
-                        make.top.equalTo(0)
-                    } else {
-                        let last = bottomContainer.subviews[n - 1]
-                        make.top.equalTo(last.snp.bottom).offset(vOffset)
-                    }
-                }
+        func afterAddButton(_ button: UIButton, _ vOffset: CGFloat?) {
+            if let space = vOffset,
+                let last = bottomContainer.arrangedSubviews.last {
+                bottomContainer.setCustomSpacing(space, after: last)
             }
-        }
-        
-        @discardableResult
-        func addAction(_ title: String,
-                       style: ActionStyle = .theme,
-                       vOffset: CGFloat = 0,
-                       closure: (() -> Void)? = nil) -> UIButton {
-            addAction(title, config: {
-                switch style {
-                case .theme:
-//                    $0.backgroundColor = .accentBlue
-                    $0.titleLabel?.font = .system20
-                    $0.setTitleColor(.white, for: .normal)
-                    $0.layer.cornerRadius = 27
-                    $0.layer.masksToBounds = true
-                case .white:
-                    $0.backgroundColor = .white
-                    $0.titleLabel?.font = .system16
-                    $0.setTitleColor(.gray34, for: .normal)
-                case .border:
-                    $0.backgroundColor = .white
-                    $0.titleLabel?.font = .system20
-//                    $0.setTitleColor(.accentBlue, for: .normal)
-                    $0.layer.cornerRadius = 27
-                    $0.layer.masksToBounds = true
-//                    $0.layer.borderColor = UIColor.accentBlue.cgColor
-                    $0.layer.borderWidth = 1
-                }
-                $0.setTitle(title, for: .normal)
-            }, vOffset: vOffset, closure: closure)
+            bottomContainer.addArrangedSubview(button)
         }
         
         private(set) unowned var topContainer: VirtualView!
-        private(set) unowned var bottomContainer: VirtualView!
+        private(set) unowned var bottomContainer: UIStackView!
     }
-    
-    enum Action {
-        
-        static func show<T: HUD.ActionView>(
-            topLevel: Bool = false,
-            careteFactory: () -> T) {
-            guard let window = HUD.window(topLevel: topLevel) else { return }
-            if window.isHidden {
-                Console.trace("HUD.show failed, window.isHidden = true")
-                return
-            }
-            let view = careteFactory()
-            guard let last = view.bottomContainer.subviews.last else {
-                fatalError("must add at least one action button")
-            }
-            last.snp.makeConstraints { make in
-                make.bottom.equalTo(0)
-            }
-            view.show(on: window)
-        }
-    }
+     
 }

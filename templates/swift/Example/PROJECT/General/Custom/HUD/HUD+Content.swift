@@ -1,11 +1,15 @@
 //
 //  HUD.swift
-//  PROJECT
+//  Chatbabe
 //
-//  Created by USER_NAME on TODAYS_DATE.
+//  Created by 李阳 on 2023/06/07.
 //
 
-import Foundation
+import UIKit
+import SnapKit
+import SwifterKnife
+
+
 
 extension HUD {
     class ContentView: HUD.BaseView {
@@ -19,27 +23,42 @@ extension HUD {
         private var originTransform: CGAffineTransform?
         
         @objc private func keyboardWillChangeFrame(_ notify: Notification) {
-            guard let view = theInputView else { return }
-            let rect = notify.userInfo?[UIApplication.keyboardFrameEndUserInfoKey] as? CGRect
-            let keyboardH = rect?.height ?? 366
-            let show: Bool = (rect?.minY ?? 0) < Screen.height
-            let duration: TimeInterval = notify.userInfo?[UIApplication.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
+            guard let event = KeyboardEvent(notification: notify),
+                  let view = theInputView else { return }
+            let isPresented = event.isPresented
             
-            UIView.animate(withDuration: max(duration, 0.25)) {
-                if show {
+            if isPresented, originTransform != nil { return }
+            if !isPresented, originTransform == nil { return }
+            
+            UIView.animate(withDuration: event.duration, delay: 0, options: event.options) {
+                if isPresented {
+                    if let _ = self.originTransform { return }
                     let crect = view.convert(view.bounds, to: nil)
-                    let delta = keyboardH - (Screen.height - crect.maxY) + 10
-                    guard delta > 0 else { return }
+                    let delta = event.endFrame.minY - crect.maxY - h10
+                    guard delta < 0 else { return }
                     let transform = self.contentView.transform
                     self.originTransform = transform
-                    self.contentView.transform = transform.translatedBy(x: 0, y: -delta)
+                    self.contentView.transform = transform.translatedBy(x: 0, y: delta)
                 } else {
                     guard let transform = self.originTransform else {
                         return
                     }
-                    self.contentView.transform  = transform
+                    self.contentView.transform = transform
                     self.originTransform = nil
                 }
+            }
+        }
+        
+        var tapBackgroundToDismiss: Bool = false
+        
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            guard tapBackgroundToDismiss else { return }
+            guard let touch = touches.first else { return }
+            let point = touch.location(in: self)
+            switch (self, point, event) {
+            case self.contentView: break
+            default:
+                dismiss { }
             }
         }
         
@@ -64,26 +83,18 @@ extension HUD {
             frame = view.bounds
             view.addSubview(self)
             
-            var size = contentView.bounds.size
-            if size.isEmpty {
-                layoutIfNeeded()
-                size = contentView.bounds.size
-            }
-            
-            doAnimation(true, contentSize: size) {
+            doAnimation(true) {
                 
             }
         }
         func dismiss(completion: @escaping () -> Void) {
-            let size = contentView.bounds.size
-            doAnimation(false, contentSize: size) {
+            doAnimation(false) {
                 completion()
                 self.removeFromSuperview()
             }
         }
         
         func doAnimation(_ show: Bool,
-                         contentSize size: CGSize,
                          completion: @escaping () -> Void) {
             completion()
         }

@@ -212,11 +212,7 @@ extension HUD {
         }
         func dismiss() {
             isPresenting = false
-            if let mask = superview as? HUD.MaskView {
-                mask.removeFromSuperview()
-            } else {
-                removeFromSuperview()
-            }
+            removeFromSuperview()
         }
         private unowned var shapeLayer: CAShapeLayer!
     }
@@ -249,7 +245,7 @@ extension HUD {
 
 // MARK: - Tips
 extension HUD.Popup {
-    private static var prevTips: HUD.PopupTips?
+    private static weak var prevTips: HUD.PopupTips?
     static func show(tips: String, from view: UIView? = nil, in rect: CGRect? = nil, direction: HUD.ArrowDirection? = nil) {
         guard let window = HUD.window else { return }
         prevTips?.dismiss()

@@ -32,22 +32,23 @@ extension HUD {
         }
         
         override func doAnimation(_ show: Bool,
-                                  contentSize size: CGSize,
                                   completion: @escaping () -> Void) {
-            if show {
-                UIView.animate(withDuration: 0.25) {
-                    self.contentView.transform = CGAffineTransform(translationX: 0, y: -size.height)
-                    self.backgroundColor = UIColor(gray: 0, alpha: 0.4)
-                } completion: { _ in
-                    completion()
+            if show { layoutIfNeeded() }
+            contentView.snp.remakeConstraints { make in
+                make.leading.trailing.equalToSuperview()
+                if show {
+                    make.bottom.equalToSuperview()
+                } else {
+                    make.top.equalTo(self.snp.bottom)
                 }
-            } else {
-                UIView.animate(withDuration: 0.25) {
-                    self.contentView.transform = .identity
-                    self.backgroundColor = .clear
-                } completion: { _ in
-                    completion()
-                }
+            }
+//            self.setNeedsUpdateConstraints()
+//            self.updateConstraintsIfNeeded()
+            UIView.animate(withDuration: 0.25) {
+                self.layoutIfNeeded()
+                self.backgroundColor = show ? UIColor(gray: 0, alpha: 0.4) : .clear
+            } completion: { _ in
+                completion()
             }
         }
     }

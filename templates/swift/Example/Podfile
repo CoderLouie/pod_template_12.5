@@ -28,6 +28,15 @@ target '${POD_NAME}_dis' do
   commonPods
 end
 
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
+  end
+end
 
 # abstract_target 'abstract_pod' do  #这里的abstract_pod在实际targets中不存在，是虚拟
 # 	pod 'SwiftyUserDefaults'

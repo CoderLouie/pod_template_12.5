@@ -41,7 +41,7 @@ extension HUD {
             case aboveTabbar
             case aboveHomeIndicator
         }
-        private static var previousTips: UIView?
+        private static weak var previousTips: UIView?
         static func show(_ title: String, _ position: Position = .center, completion: (() -> Void)? = nil) {
             guard let window = HUD.window else { return } 
             let tipView = TipsView()

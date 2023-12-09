@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import YYKit
 
 // MARK: - Alert
 extension HUD {
     class AlertView: HUD.ActionView {
-        override var shouldAddLeftTopCloseButton: Bool { true }
         override func setup() {
             super.setup()
             
@@ -49,23 +47,22 @@ extension HUD {
     
     enum Alert {
         static func show(
+            topLevel: Bool = false,
             image: UIImage? = nil,
             message: String,
             actionTitle: String = "OK".localized,
-            action: (() -> Void)? = nil) {
-            
-            HUD.Action.show {
-                let view = HUD.AlertView()
-                view.imageView.image = image
-                view.label.text = message
-                view.addAction(actionTitle, closure: action)
-                return view
+            action: (() -> Void)? = nil) {                 HUD.Content.show(topLevel: topLevel) {
+                    let view = HUD.AlertView()
+                    view.imageView.image = image
+                    view.label.text = message
+//                view.addAction(actionTitle, closure: action)
+                    return view
+                }
             }
-        }
         
         static func showIAPError(_ tip: String? = nil, action: (() -> Void)? = nil) {
             let tips = tip ?? "iap_error".localized
-            show(image: UIImage(named: "img_wifierror"), message: tips, action: action)
+            show(topLevel: true, image: UIImage(named: "img_wifierror"), message: tips, action: action)
         }
     }
 }
