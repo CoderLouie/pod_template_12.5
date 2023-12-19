@@ -10,6 +10,9 @@ import SnapKit
 import SwifterKnife
 
 
+protocol HUDDismissable: AnyObject {
+    func dismiss(completion: (() -> Void)?)
+}
 
 extension HUD {
     class ContentView: HUD.BaseView {

@@ -9,12 +9,25 @@ import Foundation
 import UIKit
 import SwifterKnife
 
-protocol HUDActionAdded: AnyObject {
-    
-    func dismiss(completion: (() -> Void)?)
+protocol HUDActionAdded: HUDDismissable {
     func afterAddButton(_ button: UIControl, _ vOffset: CGFloat?)
+    var onDimiss: ((Any) -> Void)? { get set }
 }
 extension HUDActionAdded {
+    func setOnDismiss(_ closure: @escaping (_ this: Self, _ tag: Int) -> Void) {
+        self.onDimiss = { p in
+            guard let info = p as? (Self, Int) else { return }
+            closure(info.0, info.1)
+        }
+    }
+    
+    func dismiss(with tag: Int, completion: ((_ this: Self, _ tag: Int) -> Void)? = nil) {
+        self.dismiss { [unowned self] in
+            completion?(self, tag)
+            self.onDimiss?((self, tag))
+        }
+    }
+    
     func _addAction(_ button: UIControl,
                     vOffset: CGFloat? = nil,
                     closure: @escaping (Self, UIButton) -> Void) -> TPButton {
@@ -28,8 +41,10 @@ extension HUDActionAdded {
     func addAction(_ button: UIControl,
                    vOffset: CGFloat? = nil,
                    closure: (() -> Void)? = nil) -> TPButton {
-        _addAction(button, vOffset: vOffset) { this, _ in
-            this.dismiss(completion: closure)
+        _addAction(button, vOffset: vOffset) { this, sender in
+            this.dismiss(with: sender.tag) { this, tag in
+                closure?()
+            }
         }
     }
     @discardableResult
@@ -45,7 +60,7 @@ extension HUDActionAdded {
                     vOffset: CGFloat? = nil,
                     closure: @escaping (Self, TPButton) -> Void) -> TPButton {
         _addAction(button, vOffset: vOffset) { this, sender in
-            this.dismiss {
+            this.dismiss(with: sender.tag) { this, tag in
                 closure(this, sender)
             }
         }
@@ -97,6 +112,7 @@ extension HUD {
             }
             bottomContainer.addArrangedSubview(button)
         }
+        var onDimiss: ((Any) -> Void)?
         
         private(set) unowned var topContainer: VirtualView!
         private(set) unowned var bottomContainer: UIStackView!

@@ -9,7 +9,6 @@ import Foundation
 
 
 protocol Request {
-    var tag: Int { get }
 }
 enum NextRequestControl {
     case remove
@@ -21,11 +20,15 @@ fileprivate var requestMap: NSMutableDictionary = .init()
 
 protocol SyncRequestManager {
     associatedtype RequestType: Request
+    typealias Action = Int
+    typealias RequestTag = Int
+    
+    static func processRequest(_ request: RequestType,
+                               tag: RequestTag,
+                               onFinished: @escaping (_ request: RequestType, _ action: Action) -> Void)
      
-    static func processRequest(_ request: RequestType, onFinished: @escaping (_ request: RequestType, _ action: Int) -> Void)
-     
-    typealias FinishInfo = (request: RequestType, action: Int)
-    typealias FinshAndNextControl = (_ this: FinishInfo, _ next: RequestType?) -> NextRequestControl?
+    typealias FinishInfo = (request: RequestType, tag: RequestTag, action: Action)
+    typealias FinshAndNextControl = (_ this: FinishInfo, _ next: RequestTag?) -> NextRequestControl?
 }
 fileprivate extension NSMutableArray {
     var isEmpty: Bool { count == 0 }
@@ -48,37 +51,39 @@ extension SyncRequestManager {
         return arr
     }
     private static var firstItem: (request: () -> RequestType,
-                                  closure: FinshAndNextControl)? {
-        items.firstObject as? (() -> RequestType, FinshAndNextControl)
+                                   tag: RequestTag,
+                                   closure: FinshAndNextControl)? {
+        items.firstObject as? (() -> RequestType, RequestTag, FinshAndNextControl)
     }
     
-    static func request(_ requestBuild: @escaping () -> RequestType, onFinished: @escaping FinshAndNextControl) {
+    static func request(tag: RequestTag,
+                        build: @escaping () -> RequestType,
+                        onFinished: @escaping FinshAndNextControl) {
         let isEmpty = items.isEmpty
-        items.add((requestBuild, onFinished))
+        items.add((build, tag, onFinished))
         if isEmpty {
-            process(requestBuild(), onFinished: onFinished)
+            process(build(), tag: tag, onFinished: onFinished)
         }
     }
-    private static func process(_ reqest: RequestType, onFinished: @escaping FinshAndNextControl) {
-        processRequest(reqest) { req, action in
+    private static func process(_ reqest: RequestType, tag: RequestTag, onFinished: @escaping FinshAndNextControl) {
+        processRequest(reqest, tag: tag) { req, action in
             items.removeObject(at: 0)
-            guard let nextItem = firstItem else {
-                let _ = onFinished((req, action), nil)
+            guard let next = firstItem else {
+                let _ = onFinished((req, tag, action), nil)
                 return
             }
-            let nextReq = nextItem.0()
-            let control = onFinished((req, action), nextReq) ?? .goon
+            let control = onFinished((req, tag, action), next.tag) ?? .goon
             switch control {
             case .remove:
                 items.removeObject(at: 0)
-                guard let next = firstItem else {
+                guard let item = firstItem else {
                     return
                 }
-                process(next.0(), onFinished: next.1)
+                process(item.request(), tag: item.tag, onFinished: item.closure)
             case .removeSuccessors:
                 items.removeAllObjects()
             case .goon:
-                process(nextReq, onFinished: nextItem.1)
+                process(next.request(), tag: next.tag, onFinished: next.closure)
             }
         }
     }
