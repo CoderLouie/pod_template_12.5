@@ -54,5 +54,10 @@
 	<string>Camera authority is needed to take photos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone authority is needed to conbime videos.</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UISceneConfigurations</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
