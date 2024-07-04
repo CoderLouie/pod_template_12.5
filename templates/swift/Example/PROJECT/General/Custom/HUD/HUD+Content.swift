@@ -15,7 +15,7 @@ protocol HUDDismissable: AnyObject {
 }
 
 extension HUD {
-    class ContentView: HUD.BaseView {
+    class ContentView: HUD.BaseView, HUDDismissable {
         
         var theInputView: UIView? {
             nil
@@ -90,9 +90,9 @@ extension HUD {
                 
             }
         }
-        func dismiss(completion: @escaping () -> Void) {
+        func dismiss(completion: (() -> Void)?) {
             doAnimation(false) {
-                completion()
+                completion?()
                 self.removeFromSuperview()
             }
         }

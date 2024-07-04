@@ -13,7 +13,7 @@ install! 'cocoapods', :preserve_pod_file_structure => true
 
 def commonPods 
   
-  pod 'YYKit', :git => 'https://github.com/CoderLouie/YYKit.git', :branch => 'swift'
+  # pod 'YYKit', :git => 'https://github.com/CoderLouie/YYKit.git', :branch => 'swift'
   pod 'SwifterKnife', :git => 'https://github.com/CoderLouie/SwifterKnife.git', :branch => 'develop'
   pod 'SnapKit', :git => 'https://github.com/CoderLouie/SnapKit.git', :branch => 'my_source'
   pod 'lottie-ios'

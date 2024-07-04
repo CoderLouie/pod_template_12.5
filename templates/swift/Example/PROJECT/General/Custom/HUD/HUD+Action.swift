@@ -30,17 +30,18 @@ extension HUDActionAdded {
     
     func _addAction(_ button: UIControl,
                     vOffset: CGFloat? = nil,
-                    closure: @escaping (Self, UIButton) -> Void) -> TPButton {
+                    closure: @escaping (Self, UIControl) -> Void) -> UIControl {
         button.addTouchUpInsideClosure { [unowned self] sender, event in
             closure(self, sender)
         }
-        afterAddTPButton($0, vOffset)
+        afterAddButton(button, vOffset)
+        return button
     }
     
     @discardableResult
     func addAction(_ button: UIControl,
                    vOffset: CGFloat? = nil,
-                   closure: (() -> Void)? = nil) -> TPButton {
+                   closure: (() -> Void)? = nil) -> UIControl {
         _addAction(button, vOffset: vOffset) { this, sender in
             this.dismiss(with: sender.tag) { this, tag in
                 closure?()
@@ -50,7 +51,7 @@ extension HUDActionAdded {
     @discardableResult
     func addAction1(_ button: UIControl,
                     vOffset: CGFloat? = nil,
-                    closure: @escaping (Self) -> Void) -> TPButton {
+                    closure: @escaping (Self) -> Void) -> UIControl {
         _addAction(button, vOffset: vOffset) { this, _ in
             closure(this)
         }
@@ -58,7 +59,7 @@ extension HUDActionAdded {
     @discardableResult
     func addAction2(_ button: UIControl,
                     vOffset: CGFloat? = nil,
-                    closure: @escaping (Self, TPButton) -> Void) -> TPButton {
+                    closure: @escaping (Self, UIControl) -> Void) -> UIControl {
         _addAction(button, vOffset: vOffset) { this, sender in
             this.dismiss(with: sender.tag) { this, tag in
                 closure(this, sender)
@@ -70,7 +71,7 @@ extension HUDActionAdded {
 
 extension HUD {
     class ActionView: HUD.ContentView, HUDActionAdded {
-         
+        
         var topContainerEdgeInset: UIEdgeInsets {
             .init(top: 28.fit, left: h20, bottom: 0, right: h20)
         }
@@ -105,7 +106,7 @@ extension HUD {
                 }
             }
         }
-        func afterAddButton(_ button: UIButton, _ vOffset: CGFloat?) {
+        func afterAddButton(_ button: UIControl, _ vOffset: CGFloat?) {
             if let space = vOffset,
                 let last = bottomContainer.arrangedSubviews.last {
                 bottomContainer.setCustomSpacing(space, after: last)

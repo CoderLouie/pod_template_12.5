@@ -98,7 +98,7 @@ fileprivate class VideoLoopCell: CarouselViewCell {
         }
     }
     func render(with item: LocalPlayer) {
-        videoView.layer.removeAllSublayers()
+        videoView.layer.removeSublayers()
         item.layer.frame = bounds
         videoView.layer.addSublayer(item.layer)
     }
