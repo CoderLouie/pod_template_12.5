@@ -14,6 +14,13 @@ class NavigationController: UINavigationController {
 
         // Do any additional setup after loading the view.
         self.delegate = self
+        setNavigationBarHidden(true, animated: false)
+    }
+    override var childForStatusBarStyle: UIViewController? {
+        topViewController
+    }
+    override var childForStatusBarHidden: UIViewController? {
+        topViewController
     }
     
     override func pushViewController(_ vc: UIViewController, animated: Bool) {

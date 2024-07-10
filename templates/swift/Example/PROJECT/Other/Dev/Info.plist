@@ -20,14 +20,25 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera authority is needed to take photos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone authority is needed to conbime videos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Album authority is needed to edit or save photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Album authority is needed to edit or save videos</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>To provide personalized services, (like ADs you might be interested in), we recommend that you allow the access.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
+	<string>LaunchScreen.storyboard</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -35,29 +46,8 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Album authority is needed to edit or save photos</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Album authority is needed to edit or save videos</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>To provide personalized services, (like ADs you might be interested in), we recommend that you allow the access.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera authority is needed to take photos</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone authority is needed to conbime videos.</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UISceneConfigurations</key>
-		<dict/>
-	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>
